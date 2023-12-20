@@ -8,6 +8,9 @@
 	<link rel="stylesheet" type="text/css" href="CSS/tagsStyle.css">
     <link rel="stylesheet" type="text/css" href="CSS/idStyle.css">
     <link rel="stylesheet" type="text/css" href="CSS/classStyle.css">
+
+    <script type="text/javascript" src="src/js/loadPages.js"></script>
+
 </head>
 <body class="dark">
 
@@ -23,36 +26,36 @@
             <!--Up list-->
             <nav>
                 <ul>
-                    <li>
+                    <li onclick="loadPage('dashboard')">
                         Accueil
                     </li>
-                    <li>
+                    <li onclick="loadPage('schedule')">
                         Agenda
                     </li>
-                    <li>
+                    <li onclick="loadPage('grades')">
                         Notes
                     </li>
-                    <li>
+                    <li onclick="loadPage('absences')">
                         Absences
                     </li>
-                    <li>
+                    <li onclick="loadPage('courses')">
                         Cours
                     </li>
-                    <li>
+                    <li onclick="loadPage('projects')">
                         Projects de Groupes
                     </li>    
-                    <li>
+                    <li onclick="loadPage('account')">
                         Mon Compte
                     </li>
                 </ul>
             </nav>
 
-            <div class="ulBottom flex flexCenter"><a class="underlinePointer">Credit</a> <a class="underlinePointer">Mon compte</a></div>
+            <div class="ulBottom flex flexCenter"><a class="underlinePointer" onclick="loadPage('credits')">Credit</a> <a class="underlinePointer" onclick="loadPage('softwareAccount')">Mon compte</a></div>
 
-        </div>
+        </div>  <!--softwareAccount-->
 
         <div id="mainPart">
-            
+            <div class="box flex flexCenter" style="width: 50%; height: 40%; margin: auto; margin-top: 50px;"><p>You're in a strange place...</p></div>
         </div>
 
 
