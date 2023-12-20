@@ -15,7 +15,7 @@
 }
 
 #rightPart ul li{
-    height: 90px;
+    height: 70px;
     width: 90%;
     margin: auto;
     margin-bottom: 5px;
@@ -27,7 +27,6 @@
     font-size: 20px;
     font-weight: 800;
     color: var(--policeColor);
-    /*background-color: rgba(0, 0, 0, 0.08);*/
     
     list-style: none;
 
@@ -46,8 +45,7 @@
 #rightPart{
     
     width: var(--rightPartWidth);
-    height: 100%;
-    height: 100vh;
+    height: var(--mainPartHeight);
     background-color: var(--rightPartColor);
     display: block;
     overflow: auto;
@@ -58,19 +56,25 @@
     width: var(--mainPartWidth);
     background-color: var(--mainPartColor);
     display: block;
-    height: 100vh;
+    height: var(--mainPartHeight);
     overflow: auto;
 }
+#mainHeader{
+    height: var(--headerPartHeight);
+}
 
-#mainPart > div > h1{
+#mainHeader > div{
+    background-color: var(--rightPartColor);
+}
+
+#header > div > h1{
     margin: 0px;
-    margin-bottom: 20px;
-    height: 100px;
-    line-height: 90px;
+    height: 100%;
+    line-height: var(--headerPartHeight);
     position: sticky;
     z-index: 2500;
     top: 0px;
-    background-color: var(--rightPartColor);
+    
     letter-spacing: 5px;
     text-transform: uppercase;
     font-weight: 900;

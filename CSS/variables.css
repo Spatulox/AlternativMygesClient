@@ -1,6 +1,8 @@
 :root{
-    --rightPartWidth: 18%;
-    --mainPartWidth: 82%;
+    --rightPartWidth: 15%;
+    --mainPartWidth: 85%;
+    --mainPartHeight: 90vh;
+    --headerPartHeight: 10vh;
 }
 
 .light{

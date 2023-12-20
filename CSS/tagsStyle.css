@@ -18,6 +18,10 @@ main{
     color: var(--policeColor);
 }
 
+nav{
+    margin-bottom: 50px;
+}
+
 
 
 
