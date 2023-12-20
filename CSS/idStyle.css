@@ -52,7 +52,6 @@
 }
 
 #mainPart{
-    /*margin-left: 20%;*/
     width: var(--mainPartWidth);
     background-color: var(--mainPartColor);
     display: block;

@@ -17,7 +17,7 @@
     padding-bottom: 25%;
     margin: 5% 10%;
     background-color: aqua;
-    border-radius: 20px 100px 20px 100px;
+    border-radius: 100px 20px 100px 20px;
     transition: ease-in-out, 0.5s;
 }
 
