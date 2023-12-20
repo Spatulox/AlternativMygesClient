@@ -1,0 +1,80 @@
+
+/* Variables */
+
+@import 'variables.css';
+
+
+/* Class with tags */
+
+/* Class */
+
+.bold{
+    font-weight: 800;
+}
+
+.box{
+    width: 25%;
+    padding-bottom: 25%;
+    margin: 5% 10%;
+    background-color: aqua;
+    border-radius: 20px 100px 20px 100px;
+    transition: ease-in-out, 0.5s;
+}
+
+.box:hover{
+    transform: scale(1.05);
+    transition: ease-in-out, 0.5s;
+}
+
+.cursorPointer{
+    cursor: pointer;
+}
+
+.flex{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.flexCenter{
+    justify-content: center;
+    align-items: center;
+}
+
+.flexStart{
+    justify-content: start;
+    align-items: center;
+}
+
+.no-wrap{
+    flex-wrap: nowrap;
+}
+
+.textCenter{
+    text-align: center;
+}
+
+.ulBottom{
+    position: absolute;
+    bottom: 5px;
+    width: var(--rightPartWidth);
+}
+
+.underline{
+    text-decoration: underline;
+}
+
+.underlinePointer:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.width100{
+    width: 100%;
+}
+
+
+
+
+@media only screen and (max-width: 1500px) {
+
+}

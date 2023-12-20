@@ -1,0 +1,18 @@
+:root{
+    --rightPartWidth: 18%;
+    --mainPartWidth: 82%;
+}
+
+.light{
+    --rightPartColor: blue;
+    --mainPartColor: lightgrey;
+	--colorMain: #E6E6E6;
+    --policeColor : white;
+}
+
+.dark{
+    --rightPartColor: #2b2b2b;
+    --mainPartColor: #444444;
+	--colorMain: #1D1D1D;
+    --policeColor : white;
+}

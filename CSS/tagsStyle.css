@@ -1,0 +1,26 @@
+
+/* Variables */
+
+@import 'variables.css';
+
+
+/* Tags  */
+
+body{
+    margin: 0px;
+    background-color: var(--colorMain);
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+
+main{
+    display: flex;
+    color: var(--policeColor);
+}
+
+
+
+
+@media only screen and (max-width: 1500px) {
+
+}
