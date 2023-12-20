@@ -4,6 +4,10 @@
 @import 'variables.css';
 
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 /* Tags  */
 
 body{
@@ -11,6 +15,11 @@ body{
     background-color: var(--colorMain);
     display: grid;
     grid-template-rows: auto 1fr auto;
+}
+
+header{
+    color: var(--policeColor);
+    background-color: var(--rightPartColor);
 }
 
 main{
