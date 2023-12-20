@@ -1,0 +1,1 @@
+Lors d'un clique sur un bouton (nav), on lit la page demandé avec JS (note par exemple) et on écrit le résultat dans la partie mainPart de la page index.html
