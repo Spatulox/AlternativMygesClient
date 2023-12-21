@@ -8,26 +8,41 @@
 
 /* Class */
 
+.animatedBox:hover{
+    transform: scale(1.05);
+    transition: ease-in-out, 0.5s;
+}
+
 .bold{
     font-weight: 800;
 }
 
 .box{
     width: 25%;
-    padding-bottom: 25%;
+    padding: 20px;
     margin: 5% 10%;
     background-color: aqua;
-    border-radius: 100px 20px 100px 20px;
-    transition: ease-in-out, 0.5s;
-}
-
-.box:hover{
-    transform: scale(1.05);
+    border-radius: 20px 20px 20px 20px;
     transition: ease-in-out, 0.5s;
 }
 
 .cursorPointer{
     cursor: pointer;
+}
+
+.defaultColor{
+    color: var(--policeColor);
+}
+
+.noDecoration{
+    text-decoration: none;
+    list-style: none;
+    color: var(--policeColor);
+}
+
+.noDecoration > li {
+    text-decoration: none;
+    list-style: none;
 }
 
 .flex{
@@ -47,6 +62,50 @@
 
 .no-wrap{
     flex-wrap: nowrap;
+}
+
+.noMargin{
+    margin: 0px;
+}
+
+.noMarginBottom{
+    margin-bottom: 0px;
+}
+
+.noMarginTop{
+    margin-top: 0px;
+}
+
+.noMarginRight{
+    margin-right: 0px;
+}
+
+.noMarginLeft{
+    margin-left: 0px;
+}
+
+.noPadding{
+    padding: 0px;
+}
+
+.noPaddingBottom{
+    padding-bottom: 0px;
+}
+
+.noPaddingTop{
+    padding-top: 0px;
+}
+
+.noPaddingRight{
+    padding-right: 0px;
+}
+
+.noPaddingLeft{
+    padding-left: 0px;
+}
+
+.marginAuto{
+    margin: auto;
 }
 
 .textCenter{
@@ -74,6 +133,18 @@
 .underlinePointer:hover{
     cursor: pointer;
     text-decoration: underline;
+}
+
+.height80{
+    height: 80%;
+}
+
+.height100{
+    height: 100%;
+}
+
+.width80{
+    width: 80%;
 }
 
 .width100{
