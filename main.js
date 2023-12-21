@@ -7,18 +7,14 @@ const createWindow = () => {
 
     const win = new BrowserWindow({
 
-      width: 1920*0.8,
-      height: 1080*0.8,
+      width: 1920*0.7,
+      height: 1080*0.7,
       webPreferences: {
         nodeIntegration: true,
         contextIsolation: false,
         devTools: true,
         preload: path.join(__dirname, "./src/js/preload.js"),
       },
-      /*,
-      webPreferences: {
-      }
-      */
     })
     
     win.setTitle('Nom de votre application')
