@@ -16,7 +16,7 @@
 
     <header id="header">
         <div class="textCenter" id="mainHeader">
-            <h1 class="bold underline">Accueil</h1>
+            <h1 class="bold underline" id="headerTitle">Accueil</h1>
         </div>
     </header>
 
@@ -26,25 +26,25 @@
             <!--Up list-->
             <nav>
                 <ul>
-                    <li onclick="loadPage('dashboard')">
+                    <li onclick="loadPage('dashboard', event)">
                         Accueil
                     </li>
-                    <li onclick="loadPage('schedule')">
+                    <li onclick="loadPage('schedule', event)">
                         Agenda
                     </li>
-                    <li onclick="loadPage('grades')">
+                    <li onclick="loadPage('grades', event)">
                         Notes
                     </li>
-                    <li onclick="loadPage('absences')">
+                    <li onclick="loadPage('absences', event)">
                         Absences
                     </li>
-                    <li onclick="loadPage('courses')">
+                    <li onclick="loadPage('courses', event)">
                         Cours
                     </li>
-                    <li onclick="loadPage('projects')">
+                    <li onclick="loadPage('projects', event)">
                         Projects de Groupes
                     </li>    
-                    <li onclick="loadPage('account')">
+                    <li onclick="loadPage('account', event)">
                         Mon Compte
                     </li>
                 </ul>
