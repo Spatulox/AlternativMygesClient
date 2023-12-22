@@ -1,9 +1,16 @@
-const { app, BrowserWindow, Menu, screen  } = require('electron')
-const path = require('path');
+import { app, BrowserWindow, Menu, screen  } from 'electron'
+import path from 'path'
+import { fileURLToPath } from 'url';
 
+// ------------------------------------------------------------------
 
 const createWindow = () => {
     const { screenWidth, screenHeight } = screen.getPrimaryDisplay().workAreaSize;
+
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+
+    console.log(__dirname)
 
     const win = new BrowserWindow({
 
@@ -13,11 +20,12 @@ const createWindow = () => {
         nodeIntegration: true,
         contextIsolation: false,
         devTools: true,
-        preload: path.join(__dirname, "./preload.js"),
+        preload: path.join(__dirname, "preload.mjs"),
+        sandbox: false
       },
     })
     
-    win.setTitle('Nom de votre application')
+    win.setTitle('MyGes Alternative Client')
     win.loadFile('index.html')
     win.webContents.openDevTools()
     Menu.setApplicationMenu(null)
