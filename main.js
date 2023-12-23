@@ -2,14 +2,19 @@ import { app, BrowserWindow, Menu, screen  } from 'electron'
 import { dirname } from 'path';
 import path from 'path'
 import { fileURLToPath } from 'url';
+//import { log } from './src/modules/globalFunction.js';
+
+
+// Can't user any log function here for some weird reason.... T_T
 
 // ------------------------------------------------------------------
 
 const createWindow = () => {
-    const { screenWidth, screenHeight } = screen.getPrimaryDisplay().workAreaSize;
-
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = path.dirname(__filename);
+
+    //log("Creating Window")
+    const { screenWidth, screenHeight } = screen.getPrimaryDisplay().workAreaSize;
 
     const win = new BrowserWindow({
 
@@ -32,6 +37,8 @@ const createWindow = () => {
 
 
 app.whenReady().then(() => {
+    //log("-------------------")
+    //log("Electron loaded")
     createWindow()
   
     app.on('activate', () => {
@@ -46,4 +53,5 @@ app.on('window-all-closed', () => {
     if (process.platform !== 'darwin'){
         app.quit()
     }
+    //log("Window closed")
 })
