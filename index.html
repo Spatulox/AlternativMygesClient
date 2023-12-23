@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="CSS/idStyle.css">
     <link rel="stylesheet" type="text/css" href="CSS/classStyle.css">
 
-    <script type="text/javascript" src="src/js/loadPages.js"></script>
+    <script type="text/javascript" src="./src/js/retrieveHtmlEvents.cjs"></script>
 
 </head>
 <body class="dark">
@@ -26,31 +26,31 @@
             <!--Up list-->
             <nav>
                 <ul>
-                    <li onclick="loadPage('dashboard', event)">
+                    <li onclick="loadPageH('dashboard', event)">
                         Accueil
                     </li>
-                    <li onclick="loadPage('schedule', event)">
+                    <li onclick="loadPageH('schedule', event)">
                         Agenda
                     </li>
-                    <li onclick="loadPage('grades', event)">
+                    <li onclick="loadPageH('grades', event)">
                         Notes
                     </li>
-                    <li onclick="loadPage('absences', event)">
+                    <li onclick="loadPageH('absences', event)">
                         Absences
                     </li>
-                    <li onclick="loadPage('courses', event)">
+                    <li onclick="loadPageH('courses', event)">
                         Cours
                     </li>
-                    <li onclick="loadPage('projects', event)">
+                    <li onclick="loadPageH('projects', event)">
                         Projects de Groupes
                     </li>    
-                    <li onclick="loadPage('account', event)">
+                    <li onclick="loadPageH('account', event)">
                         Mon Compte
                     </li>
                 </ul>
             </nav>
 
-            <div class="ulBottom flex flexCenter"><a class="underlinePointer" onclick="loadPage('credits')">Credit</a> <a class="underlinePointer" onclick="loadPage('softwareAccount')">Mon compte</a></div>
+            <div class="ulBottom flex flexCenter"><a class="underlinePointer" onclick="loadPageH('credits')">Credit</a> <a class="underlinePointer" onclick="loadPageH('softwareAccount')">Mon compte</a></div>
 
         </div>  <!--softwareAccount-->
 

@@ -1,8 +1,19 @@
-const { app, BrowserWindow, Menu, screen  } = require('electron')
-const path = require('path');
+import { app, BrowserWindow, Menu, screen  } from 'electron'
+import { dirname } from 'path';
+import path from 'path'
+import { fileURLToPath } from 'url';
+//import { log } from './src/modules/globalFunction.js';
 
+
+// Can't user any log function here for some weird reason.... T_T
+
+// ------------------------------------------------------------------
 
 const createWindow = () => {
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+
+    //log("Creating Window")
     const { screenWidth, screenHeight } = screen.getPrimaryDisplay().workAreaSize;
 
     const win = new BrowserWindow({
@@ -13,11 +24,12 @@ const createWindow = () => {
         nodeIntegration: true,
         contextIsolation: false,
         devTools: true,
-        preload: path.join(__dirname, "./preload.js"),
+        preload: path.join(__dirname, "preload.mjs"),
+        sandbox: false
       },
     })
     
-    win.setTitle('Nom de votre application')
+    win.setTitle('MyGes Alternative Client')
     win.loadFile('index.html')
     win.webContents.openDevTools()
     Menu.setApplicationMenu(null)
@@ -25,6 +37,8 @@ const createWindow = () => {
 
 
 app.whenReady().then(() => {
+    //log("-------------------")
+    //log("Electron loaded")
     createWindow()
   
     app.on('activate', () => {
@@ -39,4 +53,5 @@ app.on('window-all-closed', () => {
     if (process.platform !== 'darwin'){
         app.quit()
     }
+    //log("Window closed")
 })
