@@ -1,4 +1,5 @@
 import { app, BrowserWindow, Menu, screen  } from 'electron'
+import { dirname } from 'path';
 import path from 'path'
 import { fileURLToPath } from 'url';
 
@@ -9,8 +10,6 @@ const createWindow = () => {
 
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = path.dirname(__filename);
-
-    console.log(__dirname)
 
     const win = new BrowserWindow({
 
