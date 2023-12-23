@@ -1,27 +1,24 @@
-import { fileURLToPath } from 'url';
-import path from 'path'
-import fs from 'fs'
-
-// ------------------------------------------------------------------
+import { dirname } from 'path';
+import path from 'path';
+import fs from 'fs';
 
 export function log(str) {
-  // Determinate the path of the globalFunct.js file
-  const __filename = fileURLToPath(import.meta.url);
-  const __dirname = path.dirname(__filename);
+    //console.log(__filename); // Remplace import.meta.url par __filename
+    const __dirname = dirname(__filename);
+    //console.log(__dirname);
 
-  // Determinate the path of the log folder and file
-  const logDir = path.join(__dirname.split('\\src')[0], 'log');
-  const filePath = path.join(logDir, 'log.txt');
+    const logDir = path.join(__dirname.split('/src')[0], 'log'); // Utilisation de / au lieu de \\ pour la compatibilité multiplateforme
+    const filePath = path.join(logDir, 'log.txt');
 
-  if (fs.existsSync(logDir) == false) {
-    fs.mkdirSync(logDir);
-  }
+    //console.log(filePath);
 
-  var today = new Date();
-  let previousStr = `[${today.toLocaleDateString()} - ${today.toLocaleTimeString()}] `
+    if (!fs.existsSync(logDir)) {
+        fs.mkdirSync(logDir, { recursive: true }); // Utilisation de fs.mkdirSync avec l'option recursive
+    }
 
-  console.log(previousStr+str)
-  fs.appendFileSync(filePath, previousStr+str+'\n');
+    var today = new Date();
+    let previousStr = `[${today.toLocaleDateString()} - ${today.toLocaleTimeString()}] `;
+
+    console.log(previousStr + str);
+    fs.appendFileSync(filePath, previousStr + str + '\n');
 }
-
-
