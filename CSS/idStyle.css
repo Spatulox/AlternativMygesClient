@@ -81,14 +81,46 @@
 }
 
 
+/*1ère méthode*/
+/* #logoGES{
+    position: absolute;
+    width: 10%;
+    height: auto;
+    top: 2%;
+    left: 2%;
+} */
+
+/*2ème méthode*/
+#logoGES{
+    position: absolute;
+    width: 15%;
+    height: 10%;
+    max-height: 100px;
+    max-width: 300px;
+}
+
+@media only screen and (max-height: 500px) {
+    #logoGES{
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 1080px) {
+    #logoGES{
+        display: none;
+    }
+}
+
+
+
 
 
 @media only screen and (max-width: 1500px) {
-#mainAgenda .box{
-    width: 70%;
-    padding-bottom: 70%;
-    margin: auto;
-    margin-top: 5%;
-    margin-bottom: 5%;
-}
+    #mainAgenda .box{
+        width: 70%;
+        padding-bottom: 70%;
+        margin: auto;
+        margin-top: 5%;
+        margin-bottom: 5%;
+    }
 }
