@@ -1,4 +1,4 @@
-//import { log } from "./globalFunction.js"
+import { log } from "./globalFunction.js"
 
 export async function loadPage(string, event = null){
 
