@@ -6,6 +6,11 @@ Lors d'un clique sur un bouton (nav), on lit la page demandé avec JS (partie "n
 Impossible d'utiliser le module (ES6) log dans des fichier (ou des fonctions) cjs / partagé avec des fichiers cjs.
 	Si une fonction cjs appelle une fonction dans un js, la fonction log ne fonctionnera pas, et je sais pas pourquoi :/
 
+	Deux fonctions log :
+		Importer la fonction log depuis le module js lorsqu'on travail dans les .js
+		Importer la fonction log depuis le module cjs lorsqu'on travail dans les .cjs
+		Si le module js interagit avec la page ou une fonction venant d'une page, utilisez le log venant du .cjs
+
 
 
  // Imposter un module ES dans un fichier cjs (javascript sans module ES) :
