@@ -1,7 +1,8 @@
-import { log } from "./globalFunction.js"
+//import { log } from "./globalFunction.js"
 
 export async function loadPage(string, event = null){
-    
+
+    log(`Loading ${string} page...`)
     const mainPart = document.getElementById("mainPart")
     const headerTitle = document.getElementById("headerTitle")
 
@@ -10,7 +11,7 @@ export async function loadPage(string, event = null){
         const data = await response.text()
         mainPart.innerHTML = data
     } catch{
-        log('ERROR : An error occured in loadPage function');
+        log("ERROR : An error occured in the loadPage function")
     }
 
     if (event != null){
@@ -18,12 +19,7 @@ export async function loadPage(string, event = null){
             headerTitle.innerHTML = event.target.innerHTML
         }
         catch{
-            log('ERROR : Impossible to load the title')
+            log("ERROR : Impossible to load the title")
         }   
     }
 }
-
-
-// exports = {
-//     loadPage
-// }
