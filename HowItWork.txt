@@ -3,6 +3,8 @@ Lors d'un clique sur un bouton (nav), on lit la page demandé avec JS (partie "n
 
 
 
+Impossible d'utiliser le module (ES6) log dans des fichier (ou des fonctions) cjs / partagé avec des fichiers cjs.
+	Si une fonction cjs appelle une fonction dans un js, la fonction log ne fonctionnera pas, et je sais pas pourquoi :/
 
 
 
