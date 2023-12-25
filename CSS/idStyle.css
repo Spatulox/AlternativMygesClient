@@ -4,6 +4,37 @@
 @import 'variables.css';
 
 
+#header > div > h1{
+    margin: 0px;
+    height: 100%;
+    line-height: var(--headerPartHeight);
+    position: sticky;
+    z-index: 2500;
+    top: 0px;
+    
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    font-weight: 900;
+
+}
+
+
+#mainPart{
+    width: var(--mainPartWidth);
+    background-color: var(--mainPartColor);
+    display: block;
+    height: var(--mainPartHeight);
+    overflow: auto;
+}
+#mainHeader{
+    height: var(--headerPartHeight);
+}
+
+#mainHeader > div{
+    background-color: var(--rightPartColor);
+}
+
+
 /* Ids with tags */
 #rightPart ul{
     padding: 0px;
@@ -51,34 +82,14 @@
     overflow: auto;
 }
 
-#mainPart{
-    width: var(--mainPartWidth);
-    background-color: var(--mainPartColor);
-    display: block;
-    height: var(--mainPartHeight);
-    overflow: auto;
-}
-#mainHeader{
-    height: var(--headerPartHeight);
+#theme{
+    position: absolute;
+    right: 2%;
+    top: 2%;
+    height: 6%;
 }
 
-#mainHeader > div{
-    background-color: var(--rightPartColor);
-}
 
-#header > div > h1{
-    margin: 0px;
-    height: 100%;
-    line-height: var(--headerPartHeight);
-    position: sticky;
-    z-index: 2500;
-    top: 0px;
-    
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    font-weight: 900;
-
-}
 
 
 /*1ère méthode*/
