@@ -12,6 +12,8 @@ async function loadPageH(string, event){
 document.addEventListener("DOMContentLoaded", (event) => {
     const lightDark = document.getElementById('theme');
     const body = document.getElementsByTagName('body')[0]
+    const stillpopup = document.querySelector('#stillpopup > div');
+    let popup = document.querySelector('#normalpopup > div');
     
     lightDark.addEventListener('click', function() {
 
@@ -26,4 +28,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
         body.classList.toggle('dark')
 
     });
+
+    stillpopup.addEventListener('click', function() {
+        stillpopup.classList.remove("active")
+    })
+
+    popup.addEventListener('click', function() {
+        popup.classList.remove("active")
+    })
+
 })

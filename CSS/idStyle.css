@@ -8,6 +8,7 @@
     justify-content: space-between;
     /*max-height: 100px;*/
     max-height: var(--headerPartHeight);
+    z-index: 2500;
 }
 #header > div > h1{
     margin: 0px;
@@ -15,7 +16,7 @@
     /*line-height: var(--headerPartHeight);*/
     align-items: center;
     position: sticky;
-    z-index: 2500;
+    /*z-index: 2500;*/
     top: 0px;
     display: grid;
     
@@ -24,7 +25,6 @@
     font-weight: 900;
 
 }
-
 
 
 #mainPart{
@@ -39,6 +39,25 @@
     background-color: var(--rightPartColor);
 }
 
+#normalpopup div{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0%);
+
+    top: -200px;
+    transition: all ease-in-out 0.5s;
+}
+
+#normalpopup div.active{
+    top: 5px;
+    transition: all ease-in-out 0.5s;
+}
+
+#popupMaster{
+    width: var(--mainPartWidth);
+    position: absolute;
+    z-index: 20;
+}
 
 /* Ids with tags */
 #rightPart ul{
@@ -87,6 +106,23 @@
     overflow: auto;
 }
 
+#stillpopup div{
+    position: absolute;
+    right: 10px;
+    top: -200px;
+    transition: all ease-in-out 0.5s;
+}
+
+#stillpopup div img{
+    width: 40px;
+    height: auto;
+    margin-right: 10px;
+}
+
+#stillpopup div.active{
+    top: 5px;
+    transition: all ease-in-out 0.5s;
+}
 
 #theme{
     max-height: var(--headerPartHeight);
