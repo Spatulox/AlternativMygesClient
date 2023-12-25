@@ -18,8 +18,8 @@ const createWindow = async () => {
 
       width: 1920*0.7,
       height: 1080*0.7,
-      minWidth: 1920*0.3,
-      minHeight: 1080*0.3,
+      minWidth: 710,
+      minHeight: 430,
       icon: './src/images/GES_logo.png',
       webPreferences: {
         nodeIntegration: true,
