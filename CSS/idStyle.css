@@ -3,6 +3,42 @@
 
 @import 'variables.css';
 
+#header{
+    display: flex;
+    justify-content: space-between;
+    /*max-height: 100px;*/
+    max-height: var(--headerPartHeight);
+}
+#header > div > h1{
+    margin: 0px;
+    height: 100%;
+    /*line-height: var(--headerPartHeight);*/
+    align-items: center;
+    position: sticky;
+    z-index: 2500;
+    top: 0px;
+    display: grid;
+    
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    font-weight: 900;
+
+}
+
+
+
+#mainPart{
+    width: var(--mainPartWidth);
+    background-color: var(--mainPartColor);
+    display: block;
+    height: var(--mainPartHeight);
+    overflow: auto;
+}
+
+#mainHeader > div{
+    background-color: var(--rightPartColor);
+}
+
 
 /* Ids with tags */
 #rightPart ul{
@@ -51,64 +87,22 @@
     overflow: auto;
 }
 
-#mainPart{
-    width: var(--mainPartWidth);
-    background-color: var(--mainPartColor);
-    display: block;
-    height: var(--mainPartHeight);
-    overflow: auto;
-}
-#mainHeader{
-    height: var(--headerPartHeight);
-}
 
-#mainHeader > div{
-    background-color: var(--rightPartColor);
+#theme{
+    max-height: var(--headerPartHeight);
+    width: auto;
+    margin-right: 10px;
+}
+#theme:hover{
+    cursor: pointer;
 }
 
-#header > div > h1{
-    margin: 0px;
-    height: 100%;
-    line-height: var(--headerPartHeight);
-    position: sticky;
-    z-index: 2500;
-    top: 0px;
-    
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    font-weight: 900;
-
-}
-
-
-/*1ère méthode*/
-/* #logoGES{
-    position: absolute;
-    width: 10%;
-    height: auto;
-    top: 2%;
-    left: 2%;
-} */
-
-/*2ème méthode*/
 #logoGES{
-    position: absolute;
-    width: 15%;
-    height: 10%;
-    max-height: 100px;
-    max-width: 300px;
+    width: var(--rightPartWidth);
 }
-
-@media only screen and (max-height: 500px) {
-    #logoGES{
-        display: none;
-    }
-}
-
-@media only screen and (max-width: 1080px) {
-    #logoGES{
-        display: none;
-    }
+#logoGES img{
+    max-width: 100%;
+    max-height: 100%;
 }
 
 
