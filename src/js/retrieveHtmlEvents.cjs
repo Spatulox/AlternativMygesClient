@@ -9,7 +9,13 @@ async function loadPageH(string, event){
 // Waiting clicks
 
 //window.onload = function() {
-document.addEventListener("DOMContentLoaded", (event) => {
+document.addEventListener("DOMContentLoaded", async (event) => {
+
+    // Functions
+    const { replaceValueJsonFile } = await import('../modules/globalFunction.js');
+
+
+    // Html tags / etc...
     const lightDark = document.getElementById('theme');
     const body = document.getElementsByTagName('body')[0]
     const stillpopup = document.querySelector('#stillpopup > div');
@@ -19,9 +25,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
         if(body.classList == 'light'){
             lightDark.src = "./src/images/black-sun.png"
+            replaceValueJsonFile("./config.json", "theme", "dark")
         }
         else{
             lightDark.src = "./src/images/black-moon.png"
+            replaceValueJsonFile("./config.json", "theme", "light")
         }
 
         body.classList.toggle('light')
