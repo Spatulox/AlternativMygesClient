@@ -82,8 +82,8 @@ export function replaceValueJsonFile(fileName, keyOfValue, valueToReplace) {
     // write the JSON files
     fs.readFile(fileName, 'utf8', (err, data) => {
         if (err) {
-        log('ERROR : Erreur de lecture du fichier JSON :'+err);
-        return 'Error';
+            log('ERROR : Erreur de lecture du fichier JSON :'+err);
+            return false;
         }
         //Analyser le contenu JSON en un objet JavaScript
         const file = JSON.parse(data);
@@ -107,10 +107,11 @@ export function replaceValueJsonFile(fileName, keyOfValue, valueToReplace) {
         fs.writeFile(fileName, updatedData, 'utf8', (err) => {
         if (err) {
             log('ERROR : Erreur d\'écriture dans le fichier JSON : '+err);
-            return;
+            return false;
         }
 
         log(`Value replaced by '${valueToReplace}' for '${keyOfValue}' in '${fileName}'.`);
+        return true
         })
     })
 }
