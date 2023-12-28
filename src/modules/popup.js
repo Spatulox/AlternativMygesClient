@@ -24,5 +24,5 @@ export function popup(string){
 
     setTimeout(() =>{
         popup.classList.remove("active")
-    }, 3000)
+    }, 5000)
 }
