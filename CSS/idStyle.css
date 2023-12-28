@@ -92,7 +92,7 @@
 /*Others*/
 
 #connection{
-    z-index: 2409;
+    z-index: 2407;
     display: none;
     position: absolute;
     top: var(--headerPartHeight);
@@ -110,11 +110,6 @@
     overflow: auto;
 }
 
-#connection div input{
-    position: relative;
-    left: 85%;
-}
-
 #connection.active{
     display: block;
     transition: all ease-in-out 0.3s;
@@ -129,9 +124,9 @@
 }
 
 #eula{
-    z-index: 2500;
     display: none;
     position: absolute;
+    z-index: 2408;
     top: var(--headerPartHeight);
     left: 0;
     width: 100%;
@@ -147,7 +142,7 @@
     overflow: auto;
 }
 
-#eula div input{
+#eula div #buttonEula{
     position: relative;
     left: 85%;
 }
@@ -159,6 +154,7 @@
 
 #normalpopup div{
     position: absolute;
+    z-index: 2409;
     left: 50%;
     transform: translate(-50%, 0%);
 
@@ -174,11 +170,12 @@
 #popupMaster{
     width: var(--mainPartWidth);
     position: absolute;
-    z-index: 20;
+    z-index: 2409;
 }
 
 #stillpopup div{
     position: absolute;
+    z-index: 2409;
     right: 10px;
     top: -200px;
     transition: all ease-in-out 0.5s;
