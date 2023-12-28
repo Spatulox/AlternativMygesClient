@@ -6,7 +6,7 @@
 }
 
 .light{
-    --rightPartColor: blue;
+    --rightPartColor: #0000ba;
     --mainPartColor: lightgrey;
 	--colorMain: #E6E6E6;
     --policeColor : white;
@@ -19,4 +19,9 @@
 	--colorMain: #1D1D1D;
     --policeColor : white;
     --popupColor : grey;
+}
+
+/* Font color for the box in #mainPart */
+.dark #mainPart .box{
+    color: black;
 }

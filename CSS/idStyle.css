@@ -3,6 +3,8 @@
 
 @import 'variables.css';
 
+
+/* Big parts */
 #header{
     display: flex;
     justify-content: space-between;
@@ -39,27 +41,6 @@
     background-color: var(--rightPartColor);
 }
 
-#normalpopup div{
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, 0%);
-
-    top: -200px;
-    transition: all ease-in-out 0.5s;
-}
-
-#normalpopup div.active{
-    top: 5px;
-    transition: all ease-in-out 0.5s;
-}
-
-#popupMaster{
-    width: var(--mainPartWidth);
-    position: absolute;
-    z-index: 20;
-}
-
-/* Ids with tags */
 #rightPart ul{
     padding: 0px;
 }
@@ -95,8 +76,6 @@
     transition: ease-in-out 0.3s;
 }
 
-
-/* Globals Ids */
 #rightPart{
     
     width: var(--rightPartWidth);
@@ -104,6 +83,39 @@
     background-color: var(--rightPartColor);
     display: block;
     overflow: auto;
+}
+
+
+
+
+/*Others*/
+
+#containerAbsencesGrades{
+    width: 60%;
+}
+
+#currAgenda{
+    width: 30%;
+}
+
+#normalpopup div{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0%);
+
+    top: -200px;
+    transition: all ease-in-out 0.5s;
+}
+
+#normalpopup div.active{
+    top: 5px;
+    transition: all ease-in-out 0.5s;
+}
+
+#popupMaster{
+    width: var(--mainPartWidth);
+    position: absolute;
+    z-index: 20;
 }
 
 #stillpopup div{
@@ -152,5 +164,16 @@
         margin: auto;
         margin-top: 5%;
         margin-bottom: 5%;
+    }
+}
+
+
+@media only screen and (max-width: 800px) {
+    #containerAbsencesGrades{
+        width: 84%;
+    }
+
+    #currAgenda{
+        width: 60%;
     }
 }
