@@ -1,0 +1,124 @@
+{
+  "29/11/2023": {
+    "cours": [
+      {
+        "time": "09:45:00",
+        "content": {
+          "time": "09:45:00",
+          "type": "Cours",
+          "modality": "Présentiel",
+          "name": "S1-introduction au data mining en python",
+          "teacher": "Mme BALASOUPRAMANIANE",
+          "student_group_name": "2 ESGI - Initial classe 2 S1"
+        }
+      },
+      {
+        "time": "11:30:00",
+        "content": {
+          "time": "11:30:00",
+          "type": "Cours",
+          "modality": "Présentiel",
+          "name": "S1-introduction au data mining en python",
+          "teacher": "Mme BALASOUPRAMANIANE",
+          "student_group_name": "2 ESGI - Initial classe 2 S1"
+        }
+      }
+    ]
+  },
+  "30/11/2023": {
+    "cours": [
+      {
+        "time": "09:45:00",
+        "content": {
+          "time": "09:45:00",
+          "type": "Cours",
+          "modality": "Présentiel",
+          "name": "S1-unity",
+          "teacher": "M. VIDAL",
+          "student_group_name": "Electif : Unity"
+        }
+      },
+      {
+        "time": "11:30:00",
+        "content": {
+          "time": "11:30:00",
+          "type": "Cours",
+          "modality": "Présentiel",
+          "name": "S1-unity",
+          "teacher": "M. VIDAL",
+          "student_group_name": "Electif : Unity"
+        }
+      },
+      {
+        "time": "14:00:00",
+        "content": {
+          "time": "14:00:00",
+          "type": "Cours",
+          "modality": "Présentiel",
+          "name": "S1-unity",
+          "teacher": "M. VIDAL",
+          "student_group_name": "Electif : Unity"
+        }
+      },
+      {
+        "time": "15:45:00",
+        "content": {
+          "time": "15:45:00",
+          "type": "Cours",
+          "modality": "Présentiel",
+          "name": "S1-unity",
+          "teacher": "M. VIDAL",
+          "student_group_name": "Electif : Unity"
+        }
+      }
+    ]
+  },
+  "01/12/2023": {
+    "cours": [
+      {
+        "time": "09:45:00",
+        "content": {
+          "time": "09:45:00",
+          "type": "Cours",
+          "modality": "Présentiel",
+          "name": "S1-unity",
+          "teacher": "M. VIDAL",
+          "student_group_name": "Electif : Unity"
+        }
+      },
+      {
+        "time": "11:30:00",
+        "content": {
+          "time": "11:30:00",
+          "type": "Cours",
+          "modality": "Présentiel",
+          "name": "S1-unity",
+          "teacher": "M. VIDAL",
+          "student_group_name": "Electif : Unity"
+        }
+      },
+      {
+        "time": "14:00:00",
+        "content": {
+          "time": "14:00:00",
+          "type": "Cours",
+          "modality": "Présentiel",
+          "name": "S1-unity",
+          "teacher": "M. VIDAL",
+          "student_group_name": "Electif : Unity"
+        }
+      },
+      {
+        "time": "15:45:00",
+        "content": {
+          "time": "15:45:00",
+          "type": "Cours",
+          "modality": "Présentiel",
+          "name": "S1-unity",
+          "teacher": "M. VIDAL",
+          "student_group_name": "Electif : Unity"
+        }
+      }
+    ]
+  }
+}
