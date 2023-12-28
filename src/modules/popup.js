@@ -22,5 +22,7 @@ export function popup(string){
     popup.classList.add("active")
     //console.log(string)
 
-    setTimeout(() =>{popup.classList.remove("active")}, 3000)
+    setTimeout(() =>{
+        popup.classList.remove("active")
+    }, 3000)
 }

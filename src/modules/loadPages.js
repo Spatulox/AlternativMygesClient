@@ -1,5 +1,5 @@
 import { log } from './globalFunction.js';
-import { stillPopup, stopStillPopup, popup } from './popup.js'
+import { stillPopup, popup } from './popup.js'
 
 export async function loadPage(string, event = null){
 
