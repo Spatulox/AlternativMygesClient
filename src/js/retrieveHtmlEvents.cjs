@@ -6,9 +6,7 @@ async function loadPageH(string, event){
 }
 
 
-// Waiting clicks
-
-//window.onload = function() {
+// Waiting for clicks
 document.addEventListener("DOMContentLoaded", async (event) => {
 
     // Functions
@@ -19,7 +17,8 @@ document.addEventListener("DOMContentLoaded", async (event) => {
     const lightDark = document.getElementById('theme');
     const body = document.getElementsByTagName('body')[0]
     const stillpopup = document.querySelector('#stillpopup > div');
-    let popup = document.querySelector('#normalpopup > div');
+    const popup = document.querySelector('#normalpopup > div');
+    const buttonEula = document.getElementById('buttonEula')
     
     lightDark.addEventListener('click', function() {
 
@@ -43,6 +42,12 @@ document.addEventListener("DOMContentLoaded", async (event) => {
 
     popup.addEventListener('click', function() {
         popup.classList.remove("active")
+    })
+
+    buttonEula.addEventListener('click', function() {
+        const eula = document.getElementById('eula')
+        replaceValueJsonFile('./config.json', "eula", "true")
+        eula.classList.remove('active')
     })
 
 })

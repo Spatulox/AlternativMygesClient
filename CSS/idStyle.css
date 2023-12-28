@@ -30,6 +30,7 @@
 
 
 #mainPart{
+    z-index: 1;
     width: var(--mainPartWidth);
     background-color: var(--mainPartColor);
     display: block;
@@ -77,7 +78,7 @@
 }
 
 #rightPart{
-    
+    z-index: 2;
     width: var(--rightPartWidth);
     height: var(--mainPartHeight);
     background-color: var(--rightPartColor);
@@ -90,12 +91,70 @@
 
 /*Others*/
 
+#connection{
+    z-index: 2409;
+    display: none;
+    position: absolute;
+    top: var(--headerPartHeight);
+    left: 0;
+    width: 100%;
+    height: var(--mainPartHeight);
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: all ease-in-out 0.3s;
+}
+
+#connection div{
+    margin: 8% auto;
+    max-height: 60%;
+    width: 40%;
+    overflow: auto;
+}
+
+#connection div input{
+    position: relative;
+    left: 85%;
+}
+
+#connection.active{
+    display: block;
+    transition: all ease-in-out 0.3s;
+}
+
 #containerAbsencesGrades{
     width: 60%;
 }
 
 #currAgenda{
     width: 30%;
+}
+
+#eula{
+    z-index: 2500;
+    display: none;
+    position: absolute;
+    top: var(--headerPartHeight);
+    left: 0;
+    width: 100%;
+    height: var(--mainPartHeight);
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: all ease-in-out 0.3s;
+}
+
+#eula div{
+    margin: 8% auto;
+    max-height: 60%;
+    width: 40%;
+    overflow: auto;
+}
+
+#eula div input{
+    position: relative;
+    left: 85%;
+}
+
+#eula.active{
+    display: block;
+    transition: all ease-in-out 0.3s;
 }
 
 #normalpopup div{
