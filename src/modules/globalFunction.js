@@ -37,8 +37,8 @@ export function readJsonFile(fileName){
     } catch (error) {
         // console.error('Erreur de lecture du fichier JSON:', error);
         log(`ERROR : Reading Json file ${fileName}, ${error}`)
-        return 'Error';
-        //return false;
+        //return 'Error';
+        return false;
     }
 }
 
@@ -96,7 +96,8 @@ export function replaceValueJsonFile(fileName, keyOfValue, valueToReplace) {
             file[keyOfValue] = valueToReplace
         }
         else{
-            log('ERROR : Impossible to replace the old value by the new value, the keyOfValue doesn\'t exist')
+            log('ERROR : Impossible to replace the old value by the new value, creating a new keyOfValue')
+            file[keyOfValue] = valueToReplace
         }
 
         // Convertir l'objet JavaScript en une chaîne JSON
