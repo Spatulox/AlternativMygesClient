@@ -31,6 +31,10 @@
 }
 
 .defaultColor{
+    color: var(--mainPoliceColor);
+}
+
+.defaultHeaderMenuColor{
     color: var(--policeColor);
 }
 
@@ -51,7 +55,7 @@
 .noDecoration{
     text-decoration: none;
     list-style: none;
-    color: var(--policeColor);
+    color: var(--mainPoliceColor);
 }
 
 .noDecoration > li {

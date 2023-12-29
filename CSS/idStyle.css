@@ -36,6 +36,7 @@
     display: block;
     height: var(--mainPartHeight);
     overflow: auto;
+    color: var(--mainPoliceColor);
 }
 
 #mainHeader > div{

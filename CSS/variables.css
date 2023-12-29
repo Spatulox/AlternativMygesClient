@@ -10,6 +10,7 @@
     --mainPartColor: lightgrey;
 	--colorMain: #E6E6E6;
     --policeColor : white;
+    --mainPoliceColor : black;
     --popupColor : grey;
 }
 
@@ -18,10 +19,12 @@
     --mainPartColor: #444444;
 	--colorMain: #1D1D1D;
     --policeColor : white;
+    --mainPoliceColor : white;
     --popupColor : grey;
 }
 
 /* Font color for the box in #mainPart */
-.dark #mainPart .box{
+/* .dark #mainPart{
     color: black;
-}
+    
+} */
