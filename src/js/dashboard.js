@@ -288,12 +288,12 @@ function printRecapGrades(){
         recapGrades.innerHTML = ""
         recapGrades.appendChild(gradesDiv)
 
-        log('No local absences')
+        log('No local grades')
         return false
     }
-    else{
-        console.log('meh')
-    }
+    // else{
+        
+    // }
 
     console.log('printrecapGrades')
 }
