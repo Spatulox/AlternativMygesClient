@@ -1,7 +1,58 @@
-import { log, readJsonFile, replaceValueJsonFile } from "../modules/globalFunction.js";
+import { getYear, log, readJsonFile, replaceValueJsonFile } from "../modules/globalFunction.js";
 import { popup, stillPopup, stopStillPopup } from "../modules/popup.js";
 import { checkXTimesInternetConnection } from "../modules/checkInternetCo.js";
 
+
+
+
+// Retrieve the new grades :
+export function newGrades(string = null)
+{
+    if(string == null){
+        log('Specifie a course_name for newGrades function')
+        return false
+    }
+    const year = getYear()
+    
+    let lastGrades = readJsonFile(`./src/data/${year}_lastGrades.json`)
+    let Grades = readJsonFile(`./src/data/${year}_grades.json`)
+
+
+    for (let i = 0; i < lastGrades.length; i++)
+    {
+        if(lastGrades[i].course == string){
+            lastGrades = lastGrades[i]
+            break
+        }
+    }
+
+    for (let i = 0; i < Grades.length; i++)
+    {
+        if(Grades[i].course == string){
+            Grades = Grades[i]
+            break
+        }
+    }
+
+    let element = []
+    for (let i = 0; i < Grades.grades.length; i++) {
+
+        //console.log(lastGrades.grades[i])
+        // If new grades
+        if(!lastGrades.grades[i])
+        {
+            element.push(Grades.grades[i])
+        }
+        else if(lastGrades.grades[i] != Grades.grades[i]) {
+            element.push(`replaced - ${Grades.grades[i]}`)
+        }
+        else{
+            element.push(`no new - ${Grades.grades[i]}`)
+        }
+        
+    }
+    return element
+}
 // Get schedule from myges website
 
 // This function exist to avoid to forget a replaceValueJsonFile when doing a retur inside the refreshingGrades1()
