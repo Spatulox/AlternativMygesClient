@@ -7,7 +7,7 @@ export async function refreshingSchedule(startDate = null, endDate = null){
     stillPopup('Checking internet')
 
     //let tmp = 
-    if(!(await checkXTimesInternetConnection(10))){
+    if(!(await checkXTimesInternetConnection(1))){
         log('Definitely no Internet connection')
         popup('No internet connection')
         stopStillPopup()
