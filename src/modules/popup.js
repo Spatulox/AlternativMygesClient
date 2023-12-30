@@ -1,10 +1,7 @@
 export function stillPopup(string){
     let stillpopup = document.querySelector('#stillpopup > div');
-    // let message = document.querySelector('#stillpopup > div ');
-    // console.log(message)
     stillpopup.innerHTML = `<img src="./src/images/circle-loading.gif" alt="loading circle">${string}`
     stillpopup.classList.add("active")
-    //console.log(string)
 }
 
 export function stopStillPopup(){
