@@ -34,8 +34,6 @@ export async function checkXTimesInternetConnection(xTime = 10) {
 
   while (count < xTime) {
 
-    console.log(count)
-
     let isConnected = await new Promise((resolve) => {
       dns.lookup('google.com', (err) => {
         if (err) {
