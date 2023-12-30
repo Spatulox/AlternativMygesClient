@@ -115,3 +115,31 @@ export function replaceValueJsonFile(fileName, keyOfValue, valueToReplace) {
         })
     })
 }
+
+export function todayDate(addedDays = 0){
+    // Créer un nouvel objet Date
+    const date = new Date();
+
+    // Ajouter le nombre de jours au jour actuel
+    date.setDate(date.getDate() + addedDays);
+
+    // Récupérer le jour, le mois et l'année
+    const jour = date.getDate();
+    const mois = date.getMonth() + 1; // Les mois sont indexés à partir de 0, donc on ajoute 1
+    const annee = date.getFullYear();
+
+    // Afficher la date au format "jj/mm/aaaa"
+    const dateFormatee = jour.toString().padStart(2, '0') + "/" + mois.toString().padStart(2, '0') + "/" + annee;
+
+    
+    const jours = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+    const jourDeLaSemaine = jours[date.getDay()];
+
+    return [dateFormatee, jourDeLaSemaine];
+}
+
+export function getYear() {
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    return currentYear;
+  }
