@@ -13,6 +13,7 @@
     "electron": "^28.0.0"
   },
   "dependencies": {
+    "dns": "^0.2.2",
     "fs": "^0.0.1-security",
     "myges": "^4.7.1",
     "url": "^0.11.3"
