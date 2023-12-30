@@ -10,7 +10,12 @@ export function listFalseJustifiedAbsences(json){
     for (const date in json) {
         for (const time in json[date]) {
             if (json[date][time].justified === false) {
-                falseJust.push(json[date][time])
+                //falseJust.push(json[date][time])
+                falseJust.push({
+                    date: date,
+                    time: time,
+                    data: json[date][time]
+                })
                 //console.log(`Justification fausse trouvée pour ${absencesJson[date][time].course_name} le ${date} à ${time}`);
             }
         }
@@ -30,7 +35,7 @@ export function listJustifedAbsences(json){
             justifiedAbsences.push({
                 date: date,
                 time: time,
-                course_name: json[date][time].course_name
+                data: json[date][time]
             });
             }
         }
@@ -49,7 +54,7 @@ export async function refreshingAbsences(startDate = null, endDate = null){
     stillPopup('Checking internet')
 
     //let tmp = 
-    if(!(await checkXTimesInternetConnection(10))){
+    if(!(await checkXTimesInternetConnection(1))){
         log('Definitely no Internet connection')
         popup('No internet connection')
         stopStillPopup()
