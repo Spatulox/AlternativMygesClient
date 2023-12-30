@@ -1,4 +1,4 @@
-import { log } from "../modules/globalFunction.js";
+import { log, readJsonFile, replaceValueJsonFile } from "../modules/globalFunction.js";
 import { popup, stillPopup, stopStillPopup } from "../modules/popup.js";
 import { checkXTimesInternetConnection } from "../modules/checkInternetCo.js";
 
@@ -10,13 +10,11 @@ export function listFalseJustifiedAbsences(json){
     for (const date in json) {
         for (const time in json[date]) {
             if (json[date][time].justified === false) {
-                //falseJust.push(json[date][time])
                 falseJust.push({
                     date: date,
                     time: time,
                     data: json[date][time]
                 })
-                //console.log(`Justification fausse trouvée pour ${absencesJson[date][time].course_name} le ${date} à ${time}`);
             }
         }
     }
@@ -28,7 +26,6 @@ export function listFalseJustifiedAbsences(json){
 export function listJustifedAbsences(json){
 
     let justifiedAbsences = [];
-    // Convertir l'objet en une liste d'absences
     for (const date in json) {
         for (const time in json[date]) {
             if (json[date][time].justified === true) {
@@ -49,8 +46,30 @@ export function listJustifedAbsences(json){
 
 // ---------------------------------------------------------- //
 
-// Get schedule from myges website
+// Check if there's already a check
+// This function exist to avoid to forget a replaceValueJsonFile when doing a retur inside the refreshingAbsences1()
 export async function refreshingAbsences(startDate = null, endDate = null){
+    
+    const tmp = readJsonFile('./config.json')
+  
+    if(tmp.pendingAbsences == "true"){
+        log('There is already a refreching Absence')
+        return
+    }
+
+    replaceValueJsonFile('./config.json', "pendingAbsences", "true")
+    try{
+        await refreshingAbsences1(startDate, endDate)
+    }
+    catch{
+        log('Error when refreshingSchedule1()')
+    }
+    
+    replaceValueJsonFile('./config.json', "pendingAbsences", "false")
+}
+
+// Get schedule from myges website
+async function refreshingAbsences1(startDate = null, endDate = null){
     stillPopup('Checking internet')
 
     //let tmp = 
@@ -68,6 +87,10 @@ export async function refreshingAbsences(startDate = null, endDate = null){
 
 
     // Write the file
+    
+    
+    
+    stopStillPopup()
 
 }
 
@@ -75,6 +98,5 @@ export async function refreshingAbsences(startDate = null, endDate = null){
 
 // Read the local file and print it inside the software in absences page
 export function absences(){
-    console.log('refreshing abs')
     refreshingAbsences()
 }
