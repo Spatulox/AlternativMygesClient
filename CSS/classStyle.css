@@ -10,7 +10,7 @@
 
 .animatedBox:hover{
     transform: scale(1.05);
-    transition: ease-in-out, 0.5s;
+    transition: all ease-in-out, 0.5s;
 }
 
 .bold{
@@ -23,7 +23,7 @@
     margin: 5% 10%;
     background-color: aqua;
     border-radius: 20px 20px 20px 20px;
-    transition: ease-in-out, 0.5s;
+    transition: all ease-in-out, 0.5s;
 }
 
 .cursorPointer{
@@ -50,6 +50,62 @@
 .flexStart{
     justify-content: start;
     align-items: center;
+}
+
+.flexAround{
+    justify-content: space-around;
+    align-items: center;
+}
+
+.flexBetween{
+    justify-content: space-between;
+    align-items: center;
+}
+
+.lesson{
+    background-color: white;
+    color: black;
+
+    margin: 10px 0px;
+    padding: 10px;
+    border-radius: 10px;
+    max-height: 100px;
+    overflow: hidden;
+
+
+    transition: all ease-in-out, 0.5s;
+}
+
+.lesson:hover{
+    cursor: pointer;
+}
+
+.lesson > div{
+    background-color: lightgrey;
+    padding: 10px;
+    max-height: 38px;
+    overflow: hidden;
+
+    border-radius: 10px;
+
+    transition: all ease-in-out, 0.5s;
+}
+
+.lesson h1, .lesson h2, .lesson h3{
+    margin-top: 0;
+}
+
+.lesson.bigAgenda{
+    max-height: inherit;
+    height: auto;
+    transition: all ease-in-out, 0.5s;
+}
+
+.lesson.bigAgenda > div{
+    max-height: inherit;
+    height: auto;
+    overflow: auto;
+    transition: all ease-in-out, 0.5s;
 }
 
 .noDecoration{
@@ -108,6 +164,10 @@
 }
 
 .marginTop10{
+    margin-top: 10px;
+}
+
+.marginBottom10{
     margin-top: 10px;
 }
 
