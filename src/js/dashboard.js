@@ -11,7 +11,7 @@ async function recapSchedule(){
     await printRecapSchedule()
     await refreshingSchedule()
     await printRecapSchedule()
-    log('Recap Schedule finished !')
+    log('Recap Schedule loaded !')
     
 }
 
@@ -97,9 +97,9 @@ function printRecapSchedule(){
             lessonDiv.appendChild(lessonContentDiv)
 
             lessonHourDiv.textContent = cours[i].time;
-            const tmp = `<div class="flex flexAround wrap marginBottom10">
-                <span class="underline">${cours[i].content.name}</span><span>${cours[i].content.modality} (numéroSalle)</span>
-                </div><br>
+            const tmp = `<div class="flex flexCenter wrap marginBottom10">
+                <span class="underline bold width100">${cours[i].content.name}</span><span class="bold width100">${cours[i].content.modality} (Erard 12)</span>
+                </div><br><br>
                 <span class="underline">Type</span> : ${cours[i].content.type}<br>
                 <span class="underline">Professeur</span> : ${cours[i].content.teacher}<br>
                 <span class="underline">Classe</span> : ${cours[i].content.student_group_name}
@@ -120,7 +120,7 @@ async function recapAbsences(){
     await printRecapAbsences()
     await refreshingAbsences()
     await printRecapAbsences()
-    log('Recap Absences finished !')
+    log('Recap Absences loaded !')
 }
 
 // ---------------------------------------------------------- //
@@ -163,25 +163,28 @@ function printRecapAbsences(){
     //Only take the 3rd last absences
     const justifiedAbsences = listJustifedAbsences(absencesJson).slice(0, 3)
 
-    console.log(falseJust)
-    console.log(justifiedAbsences)
-
     const absDiv = document.createElement("div")
     const absDivTitle = document.createElement("h2")
-    const absDivUnjustified = document.createElement("div")
-    const absDivJustified = document.createElement("div")
-    
+    const absArrayDiv = document.createElement("div")
+
+    // Create html array
+    const htmlArray = document.createElement("table");
+    var head = htmlArray.createTHead();
+    var linehead = head.insertRow(0);
+    var cellHead1 = linehead.insertCell(0);
+    var cellHead2 = linehead.insertCell(1);
+    var cellHead3 = linehead.insertCell(2);
+    var cellHead4 = linehead.insertCell(3);
+    cellHead1.innerHTML = "Date";
+    cellHead2.innerHTML = "Heure";
+    cellHead3.innerHTML = "Justifié";
+    cellHead4.innerHTML = "Cours";
+   
 
     absDiv.classList.add('marginAuto')
     absDiv.classList.add('textCenter')
-    absDiv.style.width = "80%"
     absDivTitle.classList.add('textCenter')
     absDivTitle.classList.add('underline')
-    absDivUnjustified.classList.add('textCenter')
-    absDivUnjustified.classList.add('underline')
-    absDivJustified.classList.add('textCenter')
-    absDivJustified.classList.add('underline')
-    
     
 
     if(falseJust.length == 0 && justifiedAbsences.length == 0){
@@ -197,21 +200,54 @@ function printRecapAbsences(){
     absDiv.appendChild(absDivTitle)
 
     if(falseJust.length != 0){
-        
-        absDiv.appendChild(absDivUnjustified)
+
+        // Création de l'en-tête du tableau
+        // Création du corps du tableau
+        let corps = htmlArray.createTBody();
+
+        // Ajout des données au tableau
+        for (let i = 0; i < falseJust.length; i++) {
+            var ligne = corps.insertRow(i);
+            var cell1 = ligne.insertCell(0);
+            var cell2 = ligne.insertCell(1);
+            var cell3 = ligne.insertCell(2);
+            var cell4 = ligne.insertCell(3);
+            cell1.innerHTML = falseJust[i].date;
+            cell2.innerHTML = falseJust[i].time;
+            cell3.innerHTML = falseJust[i].data.justified;
+            cell3.style.color = "red"
+            cell4.innerHTML = falseJust[i].data.course_name;
+        }
+
+        absArrayDiv.appendChild(htmlArray)
     }
 
     if(justifiedAbsences.length != 0){
 
-        absDiv.appendChild(absDivJustified)
+        // Création de l'en-tête du tableau
+        // Création du corps du tableau
+        let corps = htmlArray.createTBody();
+
+        // Ajout des données au tableau
+        for (let i = 0; i < justifiedAbsences.length; i++) {
+            var ligne = corps.insertRow(i);
+            var cell1 = ligne.insertCell(0);
+            var cell2 = ligne.insertCell(1);
+            var cell3 = ligne.insertCell(2);
+            var cell4 = ligne.insertCell(3);
+            cell1.innerHTML = justifiedAbsences[i].date;
+            cell2.innerHTML = justifiedAbsences[i].time;
+            cell3.innerHTML = justifiedAbsences[i].data.justified;
+            cell3.style.color = "green"
+            cell4.innerHTML = justifiedAbsences[i].data.course_name;
+        }
+
+        absArrayDiv.appendChild(htmlArray)
     }
 
-
+    absDiv.appendChild(absArrayDiv)
     recapAbsences.innerHTML = ""
     recapAbsences.appendChild(absDiv)
-
-    
-    console.log('printrecapAbsences')
 }
 
 // ------------------------GRADES---------------------------- //
@@ -220,7 +256,7 @@ async function recapGrades(){
     await printRecapGrades()
     await refreshingGrades()
     await printRecapGrades()
-    log('Recap Grades finished !')
+    log('Recap Grades loaded !')
 }
 
 // ---------------------------------------------------------- //
