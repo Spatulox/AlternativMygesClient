@@ -4,6 +4,32 @@ async function loadPageH(string, event){
     loadPage(string, event)
 }
 
+// --------- Retrieve onclicks functions on dashboard page ------- //
+function zoomAgenda(e){
+    const element = document.querySelectorAll('.lesson');
+    element.forEach(lesson => {
+        lesson.classList.remove('bigAgenda');
+    });
+    
+    element[e].classList.add('bigAgenda')
+}
+
+async function refreshSchedule(){
+    const { refreshingSchedule } = await import('../js/schedule.js')
+    refreshingSchedule()
+}
+
+async function refreshAbsences(){
+    const { refreshingAbsences } = await import('../js/absences.js')
+    refreshingAbsences()
+}
+
+async function refreshGrades(){
+    const { refreshingGrades } = await import('../js/grades.js')
+    refreshingGrades()
+}
+
+// ------------ Retrieve clicks event on all pages --------- //
 
 // Waiting for clicks
 document.addEventListener("DOMContentLoaded", async (event) => {
@@ -21,6 +47,8 @@ document.addEventListener("DOMContentLoaded", async (event) => {
     const buttonEula = document.getElementById('buttonEula')
     const buttonConnection = document.getElementById('buttonConnection')
     
+
+    //---------------- Header events ---------------- //
     lightDark.addEventListener('click', function() {
 
         if(body.classList == 'light'){
@@ -37,6 +65,8 @@ document.addEventListener("DOMContentLoaded", async (event) => {
 
     });
 
+
+    // ------------ Popup events -------------- //
     stillpopup.addEventListener('click', function() {
         stillpopup.classList.remove("active")
     })
@@ -45,6 +75,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
         popupVar.classList.remove("active")
     })
 
+    // ------------ Utilitites events -------------- //
     buttonEula.addEventListener('click', function() {
         const eula = document.getElementById('eula')
         console.log('coucou')
@@ -71,7 +102,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
             return
         }
 
-        // Test if the connection is etablished
+        // Test if the connection is etablished with myges
 
         // Check if there is already a infos.json file to avoid overwriting some others datas
         const infos = readJsonFile("./src/data/infos.json")
@@ -94,4 +125,23 @@ document.addEventListener("DOMContentLoaded", async (event) => {
 
     })
 
+
+
+
+    //------------ document events -----------//
+    // Used to close "zooms"/"detailled" elements
+
+    document.addEventListener('click', function(e) {
+        const lessons = document.querySelectorAll('.lesson');
+        const lessonsArray = Array.from(lessons);
+    
+        const isClickInsideLesson = lessonsArray.some(lesson => lesson.contains(e.target));
+    
+        if (!isClickInsideLesson) {
+            lessonsArray.forEach(lesson => {
+                lesson.classList.remove('bigAgenda');
+            });
+        }
+    });
+    
 })
