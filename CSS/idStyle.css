@@ -39,6 +39,10 @@
     color: var(--mainPoliceColor);
 }
 
+#mainPart::-webkit-scrollbar {
+    display: none;
+}
+
 #mainHeader > div{
     background-color: var(--rightPartColor);
 }
@@ -85,6 +89,10 @@
     background-color: var(--rightPartColor);
     display: block;
     overflow: auto;
+}
+
+#rightPart::-webkit-scrollbar {
+    display: none;
 }
 
 
@@ -172,6 +180,31 @@
     width: var(--mainPartWidth);
     position: absolute;
     z-index: 2409;
+}
+
+#recapAbsences table{
+    margin: 0;
+    width: 100%;
+    margin-right: 2px;
+}
+
+#recapAbsences div div{
+    max-height: 150px;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    margin: auto;
+}
+
+#recapAbsences thead{
+    background-color: white;
+    color: black;
+}
+
+#recapAbsences tbody{
+    background-color: lightgrey;
+    color: black;
 }
 
 #stillpopup div{
