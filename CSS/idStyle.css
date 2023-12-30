@@ -125,6 +125,7 @@
 }
 
 #containerAbsencesGrades{
+    overflow: hidden;
     width: 60%;
 }
 
@@ -182,13 +183,13 @@
     z-index: 2409;
 }
 
-#recapAbsences table{
+#recapAbsences table, #recapGrades table{
     margin: 0;
     width: 100%;
     margin-right: 2px;
 }
 
-#recapAbsences div div{
+#recapAbsences div div, #recapGrades div div{
     max-height: 150px;
     overflow: auto;
     display: flex;
@@ -197,12 +198,12 @@
     margin: auto;
 }
 
-#recapAbsences thead{
+#recapAbsences thead, #recapGrades thead{
     background-color: white;
     color: black;
 }
 
-#recapAbsences tbody{
+#recapAbsences tbody, #recapGrades tbody{
     background-color: lightgrey;
     color: black;
 }
