@@ -1,6 +1,6 @@
 import { getYear, log, readJsonFile, todayDate } from "../modules/globalFunction.js"
 import { refreshingSchedule } from "./schedule.js"
-import { refreshingGrades } from "./grades.js"
+import { newGrades, refreshingGrades } from "./grades.js"
 import { refreshingAbsences, listFalseJustifiedAbsences, listJustifedAbsences } from "./absences.js"
 
 // ------------------------SCHEDULE-------------------------- //
@@ -171,14 +171,22 @@ function printRecapAbsences(){
     const htmlArray = document.createElement("table");
     var head = htmlArray.createTHead();
     var linehead = head.insertRow(0);
-    var cellHead1 = linehead.insertCell(0);
-    var cellHead2 = linehead.insertCell(1);
-    var cellHead3 = linehead.insertCell(2);
-    var cellHead4 = linehead.insertCell(3);
-    cellHead1.innerHTML = "Date";
-    cellHead2.innerHTML = "Heure";
-    cellHead3.innerHTML = "Justifié";
-    cellHead4.innerHTML = "Cours";
+
+    var cellHead1 = document.createElement("th");
+    cellHead1.appendChild(document.createTextNode("Date"));
+    linehead.appendChild(cellHead1);
+
+    var cellHead2 = document.createElement("th");
+    cellHead2.appendChild(document.createTextNode("Heure"));
+    linehead.appendChild(cellHead2);
+
+    var cellHead3 = document.createElement("th");
+    cellHead3.appendChild(document.createTextNode("Justifié"));
+    linehead.appendChild(cellHead3);
+
+    var cellHead4 = document.createElement("th");
+    cellHead4.appendChild(document.createTextNode("Cours"));
+    linehead.appendChild(cellHead4);
    
 
     absDiv.classList.add('marginAuto')
@@ -291,9 +299,146 @@ function printRecapGrades(){
         log('No local grades')
         return false
     }
-    // else{
+    else{
+
+        let Grades = readJsonFile(`./src/data/${year}_grades.json`)
+
+        const gradesDiv = document.createElement("div")
+        const gradesDivTitle = document.createElement("h2")
+        const gradesArrayDiv = document.createElement("div")
+
+        let htmlAray = document.createElement("table");
+        let thead = document.createElement("thead");
+        let tbody = document.createElement("tbody");
+
+
+        let headerRow = document.createElement("tr");
+        let matiereHeader = document.createElement("th");
+        matiereHeader.appendChild(document.createTextNode("Matières"));
+        headerRow.appendChild(matiereHeader)
+
+        gradesDiv.classList.add('marginAuto')
+        gradesDiv.classList.add('textCenter')
+        gradesDivTitle.classList.add('textCenter')
+        gradesDivTitle.classList.add('underline')
+
+        gradesDivTitle.textContent = "Notes"
         
-    // }
+        // Count the max of grades
+        let maxColumns = 1
+        for (let i = 0; i < Grades.length; i++) {
+            const newGradesVar = newGrades(Grades[i].course)
+            if(newGradesVar.length > maxColumns){
+                maxColumns = newGradesVar.length
+            }
+        }
+
+        // Create the head of the table
+        let coefHeader = document.createElement("th");
+        coefHeader.appendChild(document.createTextNode("Coef"));
+        headerRow.appendChild(coefHeader);
+        for (let i = 1; i <= maxColumns; i++) {
+            let noteHeader = document.createElement("th");
+            noteHeader.appendChild(document.createTextNode("Note " + i));
+            headerRow.appendChild(noteHeader);
+        }
+        
+        // Add the head of the table
+        thead.appendChild(headerRow);
+        htmlAray.appendChild(thead);
+
+        // Create the html table
+        for (let i = 0; i < Grades.length; i++) {
+
+            // Create and fill the line
+            // Need to fill only id there is new notes
+            const newGradesVar = newGrades(Grades[i].course)
+
+            if(newGradesVar.length != 0){
+                for (let i = 0; i < newGradesVar.length; i++) {
+
+                    if(typeof(newGradesVar[i]) !== "string"){
+
+                        var row = document.createElement("tr");
+                        let cellMatiere = document.createElement("td");
+                        cellMatiere.appendChild(document.createTextNode(Grades[i].course));
+                        row.appendChild(cellMatiere);
+                        
+
+                        let cellCoef = document.createElement("td")
+                        cellCoef.classList.add("bold")
+                        cellCoef.appendChild(document.createTextNode(Grades[i].coef))
+                        row.appendChild(cellCoef)
+                    }
+                    else if(typeof(newGradesVar[i]) === "string" && !(newGradesVar[i].includes('no new'))){
+                        
+                        var row = document.createElement("tr");
+                        let cellMatiere = document.createElement("td");
+                        cellMatiere.appendChild(document.createTextNode(Grades[i].course));
+                        row.appendChild(cellMatiere);
+                        
+
+                        let cellCoef = document.createElement("td")
+                        cellCoef.classList.add("bold")
+                        cellCoef.appendChild(document.createTextNode(Grades[i].coef))
+                        row.appendChild(cellCoef)
+                    }                    
+                }
+            }
+
+            // Fill the grades
+            //const newGradesVar = newGrades(Grades[i].course)
+            newGradesVar.forEach(note => {
+                
+                if(typeof(note) === "string" && note.includes('replaced')){
+                    let cellNote = document.createElement("td")
+                    let span = document.createElement("span")
+
+                    note = note.split(' - ')[1]
+                    span.style.color = "orange"
+
+                    span.appendChild(document.createTextNode(note))
+                    cellNote.appendChild(span)
+                    row.appendChild(cellNote)
+                }
+                else if(typeof(note) === "string" && note.includes('no new')){
+                    note = note.split(' - ')[1]
+                }
+                else if(typeof(note) === "number"){
+                    let cellNote = document.createElement("td")
+                    let span = document.createElement("span")
+
+                    span.style.color = "green"
+
+                    span.appendChild(document.createTextNode(note))
+                    cellNote.appendChild(span)
+                    row.appendChild(cellNote)
+                }
+
+            })
+            
+            let cellCount = row.getElementsByTagName("td").length;
+            // +2 because courses_name and coef
+            for (let j = cellCount; j < maxColumns+2; j++) {
+                let cellEmpty = document.createElement("td");
+                cellEmpty.appendChild(document.createTextNode(""));
+                row.appendChild(cellEmpty);
+            }
+
+            tbody.appendChild(row);
+
+        }
+
+        htmlAray.appendChild(tbody);
+        gradesArrayDiv.appendChild(htmlAray)
+
+        gradesDiv.appendChild(gradesDivTitle)
+        gradesDiv.appendChild(gradesArrayDiv)
+
+        recapGrades.innerHTML = ""
+        recapGrades.appendChild(gradesDiv);
+          
+    }
 
     console.log('printrecapGrades')
 }
