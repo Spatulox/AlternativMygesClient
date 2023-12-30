@@ -1,4 +1,4 @@
-export function stillPopup(string){
+export function stillPopup(string = "Error when passing args to still popup"){
     let stillpopup = document.querySelector('#stillpopup > div');
     stillpopup.innerHTML = `<img src="./src/images/circle-loading.gif" alt="loading circle">${string}`
     stillpopup.classList.add("active")
