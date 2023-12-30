@@ -2,7 +2,7 @@ import { log } from "../modules/globalFunction.js";
 
 import { dashboard } from "./dashboard.js";
 import { schedule } from "./schedule.js";
-import { grades } from "./schedule.js";
+import { grades } from "./grades.js";
 
 
 // Execute the function correspondig with the name
