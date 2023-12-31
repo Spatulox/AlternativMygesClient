@@ -29,6 +29,17 @@ async function refreshGrades(){
     refreshingGrades()
 }
 
+async function eulaShow(){
+    const eula = document.getElementById('eula')
+    eula.classList.add('active')
+}
+
+async function changeLoginPassword(){
+    //const eula = document.getElementById('eula')
+    const connection = document.getElementById('connection')
+    connection.classList.add('active')
+}
+
 // ------------ Retrieve clicks event on all pages --------- //
 
 // Waiting for clicks
@@ -78,7 +89,6 @@ document.addEventListener("DOMContentLoaded", async (event) => {
     // ------------ Utilitites events -------------- //
     buttonEula.addEventListener('click', function() {
         const eula = document.getElementById('eula')
-        console.log('coucou')
         replaceValueJsonFile('./config.json', "eula", "true")
         eula.classList.remove('active')
     })
@@ -87,10 +97,6 @@ document.addEventListener("DOMContentLoaded", async (event) => {
         const connection = document.getElementById('connection')
         const username = document.getElementById('username')
         const password = document.getElementById('password')
-        //replaceValueJsonFile('./config.json', "eula", "true")
-        
-        console.log(username.value)
-        console.log(password.value)
 
         if(username.value == ""){
             popup("Veuillez renseigner le nom d'utilisateur")
