@@ -36,6 +36,7 @@ header{
 main{
     display: flex;
     color: var(--policeColor);
+    max-height: var(--mainPartHeight);
 }
 
 nav{

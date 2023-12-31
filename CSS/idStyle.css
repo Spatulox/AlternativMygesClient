@@ -8,17 +8,14 @@
 #header{
     display: flex;
     justify-content: space-between;
-    /*max-height: 100px;*/
     max-height: var(--headerPartHeight);
     z-index: 2500;
 }
 #header > div > h1{
     margin: 0px;
     height: 100%;
-    /*line-height: var(--headerPartHeight);*/
     align-items: center;
     position: sticky;
-    /*z-index: 2500;*/
     top: 0px;
     display: grid;
     
@@ -99,6 +96,11 @@
 
 
 /*Others*/
+
+#allContainerDashboard{
+    height: var(--mainPartHeight);
+    box-sizing: border-box;
+}
 
 #connection{
     z-index: 2407;
