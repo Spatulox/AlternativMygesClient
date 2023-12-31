@@ -7,7 +7,18 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     // Create the file is not exist
     if(!config){
-        writeJsonFile(".", "config.json", {"theme":"","eula":""})
+        writeJsonFile(".", "config.json", {
+            "eula": "",
+            "theme": "",
+            "pendingSchedule":"false",
+            "pendingAbsences":"false",
+            "pendingGrades":"false"
+          })
+    }
+    else{
+        replaceValueJsonFile('./config.json', 'pendingSchedule', "false")
+        replaceValueJsonFile('./config.json', 'pendingAbsences', "false")
+        replaceValueJsonFile('./config.json', 'pendingGrades', "false")
     }
 
     // Check if there is a registered user

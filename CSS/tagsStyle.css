@@ -3,9 +3,20 @@
 
 @import 'variables.css';
 
-
 ::-webkit-scrollbar {
-    display: none;
+    /* height: 12px; */
+    width: 10px;
+    background: var(--rightPartColor);
+    -webkit-border-radius: 1ex;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--mainPartColor);
+    -webkit-border-radius: 1ex;
+}
+
+::-webkit-scrollbar-corner {
+    background: #000;
 }
 
 /* Tags  */
@@ -25,12 +36,24 @@ header{
 main{
     display: flex;
     color: var(--policeColor);
+    max-height: var(--mainPartHeight);
 }
 
 nav{
     margin-bottom: 50px;
 }
 
+
+table {
+    border-collapse: collapse;
+}
+  
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+  
 
 
 

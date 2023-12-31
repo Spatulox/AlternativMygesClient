@@ -62,7 +62,7 @@ export function writeJsonFile(directoryPath, name, array, optionnalSentence = ""
     }
 
 
-    fs.writeFile(`${directoryPath}/${name}.json`, json, (err) => {
+    fs.writeFileSync(`${directoryPath}/${name}.json`, json, (err) => {
         if (err) {
             console.error(err);
             log(`ERROR : error while writing file ${directoryPath}/${name}.json, ${err}`)
@@ -76,42 +76,56 @@ export function writeJsonFile(directoryPath, name, array, optionnalSentence = ""
 }
 
 
-
 export function replaceValueJsonFile(fileName, keyOfValue, valueToReplace) {
     const fs = require('fs');
-    // write the JSON files
-    fs.readFile(fileName, 'utf8', (err, data) => {
-        if (err) {
-            log('ERROR : Erreur de lecture du fichier JSON :'+err);
-            return false;
-        }
-        //Analyser le contenu JSON en un objet JavaScript
+    try {
+        // Lire le fichier JSON de manière synchrone
+        const data = fs.readFileSync(fileName, 'utf8');
+        // Analyser le contenu JSON en un objet JavaScript
         const file = JSON.parse(data);
-        // log(file)
 
-        // Ajouter une valeur au tableau
-        // Concatenate the two values
-
-        if(file[keyOfValue]){
-            file[keyOfValue] = valueToReplace
-        }
-        else{
-            log('ERROR : Impossible to replace the old value by the new value, creating a new keyOfValue')
-            file[keyOfValue] = valueToReplace
+        if (file[keyOfValue]) {
+            file[keyOfValue] = valueToReplace;
+        } else {
+            log('ERROR : Impossible to replace the old value by the new value, creating a new keyOfValue');
+            file[keyOfValue] = valueToReplace;
         }
 
         // Convertir l'objet JavaScript en une chaîne JSON
-        const updatedData = JSON.stringify(file, Object.keys(file).sort(), 2);
+        const updatedData = JSON.stringify(file, null, 2);
 
-        // Écrire les modifications dans le fichier JSON
-        fs.writeFile(fileName, updatedData, 'utf8', (err) => {
-        if (err) {
-            log('ERROR : Erreur d\'écriture dans le fichier JSON : '+err);
-            return false;
-        }
-
+        // Écrire les modifications dans le fichier JSON de manière synchrone
+        fs.writeFileSync(fileName, updatedData, 'utf8');
         log(`Value replaced by '${valueToReplace}' for '${keyOfValue}' in '${fileName}'.`);
-        return true
-        })
-    })
+    } catch (err) {
+        log('ERROR : Erreur de lecture ou d\'écriture dans le fichier JSON : ' + err);
+    }
 }
+
+export function todayDate(addedDays = 0){
+    // Créer un nouvel objet Date
+    const date = new Date();
+
+    // Ajouter le nombre de jours au jour actuel
+    date.setDate(date.getDate() + addedDays);
+
+    // Récupérer le jour, le mois et l'année
+    const jour = date.getDate();
+    const mois = date.getMonth() + 1; // Les mois sont indexés à partir de 0, donc on ajoute 1
+    const annee = date.getFullYear();
+
+    // Afficher la date au format "jj/mm/aaaa"
+    const dateFormatee = jour.toString().padStart(2, '0') + "/" + mois.toString().padStart(2, '0') + "/" + annee;
+
+    
+    const jours = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+    const jourDeLaSemaine = jours[date.getDay()];
+
+    return [dateFormatee, jourDeLaSemaine];
+}
+
+export function getYear() {
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    return currentYear;
+  }
