@@ -1,0 +1,1 @@
+- Faire une itégration du site myges directement dans le logiciel (si y'a certaines fonctionnalités qui sont indisponible dans le package javascript myges.
