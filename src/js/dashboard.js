@@ -314,7 +314,7 @@ function printRecapGrades(){
         gradesDivTitle.classList.add('textCenter')
         gradesDivTitle.classList.add('underline')
 
-        gradesDivTitle.textContent = "Notes"
+        gradesDivTitle.textContent = "Nouvelles Notes"
         
         // Count the max of grades
         let maxColumns = 1
