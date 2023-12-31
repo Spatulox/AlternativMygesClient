@@ -83,7 +83,7 @@ export function createHeadTableGrades(maxColumns){
     headerRow.appendChild(coefHeader);
     for (let i = 1; i <= maxColumns; i++) {
         let noteHeader = document.createElement("th");
-        noteHeader.appendChild(document.createTextNode("Note " + i));
+        noteHeader.appendChild(document.createTextNode("Nv Note " + i));
         headerRow.appendChild(noteHeader);
     }
     
@@ -95,7 +95,7 @@ export function createHeadTableGrades(maxColumns){
 export function createTableGrades(Grades, maxColumns, thing = null){
     let tbody = document.createElement("tbody");
 
-    const newGradesVar = newGrades(Grades[0].course)
+    let newGradesVar = newGrades(Grades[0].course)
     if(!newGradesVar){
         return false
     }
@@ -105,16 +105,16 @@ export function createTableGrades(Grades, maxColumns, thing = null){
 
         // Create and fill the line
         // Need to fill only id there is new notes
-        const newGradesVar = newGrades(Grades[i].course)
+        let newGradesVar = newGrades(Grades[i].course)
         if(!newGradesVar){
             return false
         }
 
         if(newGradesVar.length != 0){
-            for (let i = 0; i < newGradesVar.length; i++) {
-
+            for (let j = 0; j < newGradesVar.length; j++) {
                 if(thing != "big"){
-                    if(typeof(newGradesVar[i]) !== "string"){
+                    
+                    if(typeof(newGradesVar[j]) !== "string"){
 
                         var row = document.createElement("tr");
                         let cellMatiere = document.createElement("td");
@@ -127,7 +127,19 @@ export function createTableGrades(Grades, maxColumns, thing = null){
                         cellCoef.appendChild(document.createTextNode(Grades[i].coef))
                         row.appendChild(cellCoef)
                     }
-                    else if(typeof(newGradesVar[i]) === "string" && !(newGradesVar[i].includes('no new'))){
+                    else if(typeof(note) === "string" && note.includes('no new')){
+                        var row = document.createElement("tr");
+                        let cellMatiere = document.createElement("td");
+                        cellMatiere.appendChild(document.createTextNode(Grades[i].course));
+                        row.appendChild(cellMatiere);
+                        
+
+                        let cellCoef = document.createElement("td")
+                        cellCoef.classList.add("bold")
+                        cellCoef.appendChild(document.createTextNode(Grades[i].coef))
+                        row.appendChild(cellCoef)
+                    }
+                    else if(typeof(newGradesVar[i]) === "string" && !(newGradesVar[j].includes('no new'))){
                         
                         var row = document.createElement("tr");
                         let cellMatiere = document.createElement("td");
@@ -173,7 +185,7 @@ export function createTableGrades(Grades, maxColumns, thing = null){
             else if(typeof(note) === "string" && note.includes('no new') && thing == "big"){
                 let cellNote = document.createElement("td")
                 let span = document.createElement("span")
-
+                
                 note = note.split(' - ')[1]
                 span.style.color = "black"
 
@@ -194,15 +206,17 @@ export function createTableGrades(Grades, maxColumns, thing = null){
 
         })
         
-        let cellCount = row.getElementsByTagName("td").length;
-        // +2 because courses_name and coef
-        for (let j = cellCount; j < maxColumns+2; j++) {
-            let cellEmpty = document.createElement("td");
-            cellEmpty.appendChild(document.createTextNode(""));
-            row.appendChild(cellEmpty);
-        }
+        if(row){
+            let cellCount = row.getElementsByTagName("td").length;
+            // +2 because courses_name and coef
+            for (let j = cellCount; j < maxColumns+2; j++) {
+                let cellEmpty = document.createElement("td");
+                cellEmpty.appendChild(document.createTextNode(""));
+                row.appendChild(cellEmpty);
+            }
 
-        tbody.appendChild(row);
+            tbody.appendChild(row);
+        }
 
     }
 
