@@ -1,6 +1,10 @@
-// import { dirname } from 'path';
-// import path from 'path';
-// import fs from 'fs';
+/*
+* Author : Spatulox
+* Date : 11/11/2023
+*
+* Desc : Globals functions
+*
+*/
 
 export function log(str) {
     const { dirname } = require('path');

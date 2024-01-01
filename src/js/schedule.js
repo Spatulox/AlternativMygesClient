@@ -1,12 +1,21 @@
-import { log, readJsonFile, replaceValueJsonFile } from "../modules/globalFunction.js";
+/*
+* Author : Spatulox
+* Date : 01/01/2024
+*
+* Desc : Functions to call the child process wich update the schedule
+*
+*/
+
+
+import { getYear, readJsonFile, replaceValueJsonFile, log } from "../modules/globalFunction.js";
 import { popup, stillPopup, stopStillPopup } from "../modules/popup.js";
 import { checkXTimesInternetConnection } from "../modules/checkInternetCo.js";
+import { writeJsonFile } from "../modules/childProcessGlobalFunctions.js";
 
 // Get schedule from myges website
 //Check if there is already a refreshing
 // This function exist to avoid to forget a replaceValueJsonFile when doing a retur inside the refreshingSchedule1()
 export async function refreshingSchedule(startDate = null, endDate = null){
-    
     const tmp = readJsonFile('./config.json')
 
     if(tmp.pendingSchedule == "true"){

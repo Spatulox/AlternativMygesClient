@@ -1,3 +1,11 @@
+/*
+* Author : Spatulox
+* Date : 11/11/2023
+*
+* Desc : The preload.js file which check and reset some data
+*
+*/
+
 import { loadPage } from "./src/modules/loadPages.js";
 import { log, readJsonFile, writeJsonFile, replaceValueJsonFile } from "./src/modules/globalFunction.js";
 

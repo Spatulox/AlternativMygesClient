@@ -1,3 +1,11 @@
+/*
+* Author : Spatulox
+* Date : 11/11/2023
+*
+* Desc : The dashbords.js which print the dashboard page
+*
+*/
+
 import { getYear, log, readJsonFile, todayDate } from "../modules/globalFunction.js"
 import { refreshingSchedule } from "./schedule.js"
 import { newGrades, refreshingGrades, createTableGrades, createHeadTableGrades } from "./grades.js"

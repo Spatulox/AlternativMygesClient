@@ -1,5 +1,12 @@
-import { log } from "../modules/globalFunction.js";
+/*
+* Author : Spatulox
+* Date : 11/11/2023
+*
+* Desc : Function which call all the process to update datas
+*
+*/
 
+import { log } from "../modules/globalFunction.js";
 import { dashboard } from "./dashboard.js";
 import { schedule } from "./schedule.js";
 import { grades } from "./grades.js";

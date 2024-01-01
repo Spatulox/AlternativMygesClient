@@ -1,4 +1,12 @@
-// Functions called inside the html
+/*
+* Author : Spatulox
+* Date : 12/11/2023
+*
+* Desc : Functions called by the html files
+*
+*/
+
+
 async function loadPageH(string, event){
     const { loadPage } = await import('../modules/loadPages.js');
     loadPage(string, event)
