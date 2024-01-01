@@ -26,7 +26,10 @@ const createWindow = async () => {
         contextIsolation: false,
         devTools: true,
         preload: path.join(__dirname, "preload.mjs"),
-        sandbox: false
+        sandbox: false,
+        allowRunningInsecureContent: true,/*,
+        enableRemoteModule: true,*/
+        webSecurity: false
       },
     })
     
@@ -48,7 +51,6 @@ app.whenReady().then(async () => {
         }
     })
 })
-
 
 app.on('window-all-closed', async () => {
     if (process.platform !== 'darwin'){
