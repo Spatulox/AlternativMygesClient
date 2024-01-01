@@ -108,6 +108,10 @@
     transition: all ease-in-out, 0.5s;
 }
 
+.noAlignItems{
+    align-items: inherit;
+}
+
 .noDecoration{
     text-decoration: none;
     list-style: none;
@@ -173,6 +177,18 @@
 
 .marginTopBottom8Pourcent{
     margin: 8% 0;
+}
+
+.padding5{
+    padding: 5px;
+}
+
+.padding10{
+    padding: 10px;
+}
+
+.pointer{
+    cursor: pointer;
 }
 
 .popup div{

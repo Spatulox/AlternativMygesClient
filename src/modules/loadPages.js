@@ -1,5 +1,12 @@
+/*
+* Author : Spatulox
+* Date : 11/11/2023
+*
+* Desc : Get the pages and print it inside the index.html page
+*
+*/
+
 import { log } from './globalFunction.js';
-import { stillPopup, popup } from './popup.js'
 import { updatePages } from '../js/updatePages.js'
 
 export async function loadPage(string, event = null){
