@@ -15,3 +15,13 @@ Impossible d'utiliser le module (ES6) log dans des fichier (ou des fonctions) cj
 
  // Imposter un module ES dans un fichier cjs (javascript sans module ES) :
  const { loadPage } = await import('../modules/loadPages.js');
+
+
+
+/////////////////////////////////////////////// API MYGES ///////////////////////////////////////////////
+Sous process :
+- L'api myges a un problème de cross origin security, et je ne peux pas l'utiliser depuis electron facilement donc j'aouvre un autre processus qui met à jour l'agenda.
+dashboard.js qui apelle une fonction refreshSchedule qui check si y'a déjà un refresh en cours
+Si il n'y a pas de refresh en cours : apelle refreshingSchedule 1 qui execute un fichier dans un autre process.
+Ce sous process envoie des message au process parent via "process.send()"/
+Le prossecus principal execute des "log()" et des "popup()" ou du stockage de donnée en fonction de ce que le sous process envoie.
