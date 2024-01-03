@@ -102,6 +102,20 @@
     box-sizing: border-box;
 }
 
+#allContainerAbsences{
+    box-sizing: border-box;
+    min-width: 80%;
+    max-width: var(--mainPartWidth);
+}
+
+#allContainerAbsences div{
+    margin-top: 0;
+}
+
+#allContainerAbsences div div{
+    max-width: 220px;
+}
+
 #connection{
     z-index: 2407;
     display: none;
@@ -248,8 +262,6 @@
 
 
 
-
-
 @media only screen and (max-width: 1500px) {
     #mainAgenda .box{
         width: 70%;
@@ -257,6 +269,19 @@
         margin: auto;
         margin-top: 5%;
         margin-bottom: 5%;
+    }
+}
+
+@media only screen and (max-width: 1800px) {
+    #allContainerAbsences{
+        min-width: 90%;
+        margin: 40px auto;
+    }
+}
+
+@media only screen and (max-width: 1600px) {
+    #allContainerAbsences{
+        min-width: 95%;
     }
 }
 

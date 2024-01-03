@@ -118,8 +118,11 @@ function printRecapSchedule(){
             dayDiv.appendChild(lessonDiv)
         }
     }
-    agenda.innerHTML = ""
-    agenda.appendChild(dayDiv)
+
+    if(document.getElementById('currAgenda') !== null){
+        agenda.innerHTML = ""
+        agenda.appendChild(dayDiv)
+    }
 }
 
 // ------------------------ABSENCES--------------------------- //
@@ -261,9 +264,11 @@ function printRecapAbsences(){
         absArrayDiv.appendChild(htmlArray)
     }
 
-    absDiv.appendChild(absArrayDiv)
-    recapAbsences.innerHTML = ""
-    recapAbsences.appendChild(absDiv)
+    if(document.getElementById('recapAbsences') !== null){
+        absDiv.appendChild(absArrayDiv)
+        recapAbsences.innerHTML = ""
+        recapAbsences.appendChild(absDiv)
+    }
 }
 
 // ------------------------GRADES---------------------------- //
@@ -357,12 +362,12 @@ function printRecapGrades(){
         gradesDiv.appendChild(gradesDivTitle)
         gradesDiv.appendChild(gradesArrayDiv)
 
-        recapGrades.innerHTML = ""
-        recapGrades.appendChild(gradesDiv);
+        if(document.getElementById('recapGrades') !== null){
+            recapGrades.innerHTML = ""
+            recapGrades.appendChild(gradesDiv);
+        }
           
     }
-
-    console.log('printrecapGrades')
 }
 
 // ---------------------------------------------------------- //
@@ -373,31 +378,3 @@ export function dashboard(){
     recapGrades()
     
 }
-
-
-
-/*
-// Créer un nouvel élément div
-const newDiv = document.createElement("div");
-
-// Optionnel : ajouter du contenu à la div
-newDiv.textContent = "Contenu de la nouvelle div";
-
-// Ajouter la nouvelle div au corps du document
-document.body.appendChild(newDiv);
-*/
-
-
-
-/* Creer du text et une div dans la même div
-// Créer une nouvelle div
-const newDiv = document.createElement("div");
-// Créer un nœud texte
-const newText = document.createTextNode("Contenu de la nouvelle div");
-
-// Ajouter le texte à la nouvelle div
-newDiv.appendChild(newText);
-
-// Ajouter la nouvelle div à une autre div existante avec l'ID "parentDiv"
-document.getElementById("parentDiv").appendChild(newDiv);
-*/

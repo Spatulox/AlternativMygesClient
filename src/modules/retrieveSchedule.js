@@ -13,17 +13,6 @@ import { getYear } from "./globalFunction.js"
 async function Agenda(user, startD, endD){
 	process.send('Request myGes Agenda')
 
-	// log('Request class')
-	// const now = new Date();
-	// const currentYear = now.getFullYear();
-	// let classes = await getClasses(user, currentYear)
-	// if(!classes){
-	// 	process.send('No classes because of it\'s a new year, you don\'t have any schedule so you don\'t have classes in the begining of the year, SO myges is yerk, again')
-	// 	return false
-	// }
-	// classes = `${classes[0].promotion} - ${classes[0].name}`
-	// log(`Classes : ${classes}`)
-
     if(startD == null || endD == null){
         process.send('Specifie a start and an end date')
         process.send(false)
@@ -150,7 +139,6 @@ async function retrieveScheduleFromMyGES(){
         process.send(false);
         return false
     }
-    process.send('Login ok')
 
     await new Promise(resolve => {
         setTimeout(resolve, 2000);
@@ -177,17 +165,15 @@ async function retrieveScheduleFromMyGES(){
     }
 
     // For test
-    monday.setUTCHours(0,0,0,0)
-    monday.setDate(monday.getDate() + 7);
-    monday.setUTCHours(0,0,0,0)
+    // monday.setUTCHours(0,0,0,0)
+    // monday.setDate(monday.getDate() + 7);
+    // monday.setUTCHours(0,0,0,0)
 
-    // console.log(saturday)
-    saturday.setDate(saturday.getDate() + 7);
+    // // console.log(saturday)
+    // saturday.setDate(saturday.getDate() + 7);
 
     let agenda = Agenda(user, monday, saturday)
     if(!agenda){
-        //process.send(false)
-        //process.send(agenda)
         process.send(agenda)
     }
 
