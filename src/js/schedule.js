@@ -7,7 +7,7 @@
 */
 
 
-import { getYear, readJsonFile, replaceValueJsonFile, log } from "../modules/globalFunction.js";
+import { getYear, readJsonFile, replaceValueJsonFile, log, todayDate } from "../modules/globalFunction.js";
 import { popup, stillPopup, stopStillPopup } from "../modules/popup.js";
 import { checkXTimesInternetConnection } from "../modules/checkInternetCo.js";
 import { writeJsonFile } from "../modules/childProcessGlobalFunctions.js";
@@ -67,7 +67,7 @@ async function refreshingSchedule1(startD = null, endD = null){
             }
             else{
                 lastMsg = msg
-                console.log(msg)
+                //console.log(msg)
                 log(msg)
                 stillPopup(msg)
             }
@@ -84,10 +84,9 @@ async function refreshingSchedule1(startD = null, endD = null){
 
     // Read the file
     let appendSchedule
-    try{
-        appendSchedule = readJsonFile(`./src/data/${currYear}_agenda.json`)
-    }
-    catch{
+    appendSchedule = readJsonFile(`./src/data/${currYear}_agenda.json`)
+    if(!appendSchedule){
+        log(`creating ${currYear}_agenda.json`)
         appendSchedule = {}
     }
 
@@ -119,7 +118,121 @@ async function refreshingSchedule1(startD = null, endD = null){
     return false
 }
 
+function printBigSchedule(){
+
+    const year = getYear()
+    const agendaJson = readJsonFile(`./src/data/${year}_agenda.json`)
+    const containerAbs = document.getElementById('allContainerAbsences')
+
+    if(!agendaJson){
+        const dayDiv = document.createElement("div")
+        const dayDivTitle = document.createElement("h2")
+        const dayDivInput = document.createElement("input")
+
+        dayDiv.classList.add('marginAuto')
+        dayDiv.classList.add('textCenter')
+        dayDiv.style.width = "80%"
+        dayDivTitle.classList.add('textCenter')
+        dayDivTitle.classList.add('underline')
+
+        dayDivInput.classList.add('marginAuto')
+        dayDivInput.value = 'Rafraichir'
+        dayDivInput.type = 'button'
+        dayDivInput.setAttribute('onclick', `refreshSchedule()`);
+
+        dayDivTitle.textContent = "Pas d'agenda enregistré en local, attendez le refresh d'internet"
+        dayDiv.appendChild(dayDivTitle)
+        dayDiv.appendChild(dayDivInput)
+        containerAbs.innerHTML = ""
+        containerAbs.appendChild(dayDiv)
+
+        log('No local agenda')
+        return false
+    }
+
+
+    let nextLessonDay = todayDate()[0]
+    let day = todayDate()[1]
+    let isLesson = false
+
+    // Check if there is a lesson the next 5 days
+    let printAgenda = []
+    for (let i = 0; i < 5; i++) {
+        nextLessonDay = todayDate(i)[0]
+        day = todayDate(i)[1]
+        if(agendaJson[nextLessonDay]){
+            printAgenda.push(nextLessonDay)
+            isLesson = true
+        }
+    }
+
+    if(isLesson == false){
+
+        
+        const dayDivTitle = document.createElement("h2")
+        dayDivTitle.classList.add('textCenter')
+        dayDivTitle.classList.add('underline')
+        log('No Lessons')
+        dayDivTitle.textContent = "No lesson for the 5th next days"
+        containerAbs.innerHTML = ""
+        containerAbs.appendChild(dayDivTitle)
+    }
+    else{
+        containerAbs.innerHTML = ""
+        for (let i = 0; i < printAgenda.length; i++) {
+
+            const dayDiv = document.createElement("div")
+            const dayDivTitle = document.createElement("h2")
+            dayDiv.classList.add('marginAuto')
+            dayDiv.style.width = "auto"
+            dayDivTitle.classList.add('textCenter')
+            dayDivTitle.classList.add('underline')
+            
+            day = todayDate(i)[1]
+            dayDivTitle.textContent = day + " " + printAgenda[i]
+            dayDiv.appendChild(dayDivTitle)
+
+            const cours = agendaJson[printAgenda[i]].cours
+
+            for (let i = 0; i < cours.length; i++) {
+                const lessonDiv = document.createElement("div")
+                const lessonHourDiv = document.createElement("h3")
+                const lessonContentDiv = document.createElement("div")
+                
+                lessonDiv.classList.add('lesson')
+                lessonDiv.classList.add('animatedBox')
+                lessonDiv.setAttribute('onclick', `zoomAgenda(${i})`);
+                
+                lessonHourDiv.classList.add('underline')
+
+                lessonDiv.appendChild(lessonHourDiv)
+                lessonDiv.appendChild(lessonContentDiv)
+
+                lessonHourDiv.textContent = cours[i].time;
+                const tmp = `<div class="flex flexCenter wrap marginBottom10">
+                    <span class="underline bold width100">${cours[i].content.name}</span><span class="bold width100">${cours[i].content.modality} (Erard 12)</span>
+                    </div><br><br>
+                    <span class="underline">Type</span> : ${cours[i].content.type}<br>
+                    <span class="underline">Professeur</span> : ${cours[i].content.teacher}<br>
+                    <span class="underline">Classe</span> : ${cours[i].content.student_group_name}
+                    `
+
+                lessonContentDiv.innerHTML = tmp
+                
+                dayDiv.appendChild(lessonDiv)
+            }
+            containerAbs.appendChild(dayDiv)
+        }
+    }
+
+
+
+
+
+}
+
 // Read the local file and print it inside the software in schedule page
 export function schedule(){
     refreshingSchedule()
+    printBigSchedule()
 }
