@@ -6,12 +6,17 @@
 }
 
 .light{
-    --rightPartColor: #0000ba;
-    --mainPartColor: lightgrey;
+    --rightPartColor: #277abe;
+    --mainPartColor: rgb(212, 212, 212);
 	--colorMain: #E6E6E6;
     --policeColor : white;
     --mainPoliceColor : black;
-    --popupColor : grey;
+    /* --popupColor : rgb(168, 168, 168);
+    --boxBackgroundColor : #a8a8a8; */
+    
+    --popupColor : #277abe;
+    --boxBackgroundColor : #569dd6;
+
 }
 
 .dark{
@@ -21,10 +26,10 @@
     --policeColor : white;
     --mainPoliceColor : white;
     --popupColor : grey;
-}
+    --boxBackgroundColor : rgb(104, 104, 104);
 
-/* Font color for the box in #mainPart */
-/* .dark #mainPart{
-    color: black;
-    
-} */
+
+    /* --rightPartColor: #2d3943;
+    --popupColor : #2d3943;
+    --boxBackgroundColor : rgb(81, 104, 122); */
+}
