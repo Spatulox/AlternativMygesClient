@@ -128,6 +128,21 @@ export function todayDate(addedDays = 0){
     return [dateFormatee, jourDeLaSemaine];
 }
 
+export function getDateInfo(dateString) {
+    const parts = dateString.split('/');
+    const day = parseInt(parts[0], 10);
+    const month = parseInt(parts[1], 10);
+    const year = parseInt(parts[2], 10);
+    const date = new Date(year, month - 1, day); // Month is 0-based
+
+    const jours = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+    const jourDeLaSemaine = jours[date.getDay()];
+
+    const dateFormatee = day.toString().padStart(2, '0') + "/" + month.toString().padStart(2, '0') + "/" + year;
+
+    return [dateFormatee, jourDeLaSemaine];
+}
+
 export function getYear() {
     const currentDate = new Date();
     const currentYear = currentDate.getFullYear();
