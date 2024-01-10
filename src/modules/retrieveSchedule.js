@@ -100,6 +100,20 @@ async function Agenda(user, startD, endD){
 			let nameCours = agenda[i][1][obj].name
 			let teacher = agenda[i][1][obj].teacher
 			let student_group_name = agenda[i][1][obj].discipline.student_group_name
+			
+			let room
+			let campus
+			// Some course don't have any room or campus like OPEN point
+			try{
+				room = agenda[i][1][obj].rooms[0].name
+				campus = agenda[i][1][obj].rooms[0].campus
+				//process.send(agenda[i][0] + " / "+ room+ " / " + campus)
+			}
+			catch{
+				room = "N/A"
+				campus = "N/A"
+				//process.send('N/A for '+agenda[i][0])
+			}
 
 			let tmp = {
 				"time":obj,
@@ -109,16 +123,20 @@ async function Agenda(user, startD, endD){
 					"modality": modality,
 					"name": nameCours,
 					"teacher": teacher,
-					"student_group_name": student_group_name
+					"student_group_name": student_group_name,
+					"room": room,
+					"campus": campus
 				}
 			}
 			cours.push(tmp)
 		}
+		
 		agendaToWrite[agenda[i][0]] = {cours}
 	}
 
 	agenda = agendaToWrite
 	
+	//Return the agenda via process.send()
     process.send(agenda)
     process.send('Fetching Schedule finished')
     process.send(false)
