@@ -7,7 +7,7 @@
 */
 
 
-import { getYear, readJsonFile, replaceValueJsonFile, log, todayDate } from "../modules/globalFunction.js";
+import { getYear, readJsonFile, replaceValueJsonFile, log, todayDate, getDateInfo } from "../modules/globalFunction.js";
 import { popup, stillPopup, stopStillPopup } from "../modules/popup.js";
 import { checkXTimesInternetConnection } from "../modules/checkInternetCo.js";
 import { writeJsonFile } from "../modules/childProcessGlobalFunctions.js";
@@ -49,7 +49,7 @@ async function refreshingSchedule1(startD = null, endD = null){
         stillPopup('Connecting to myGes api')
     }
 
-    stillPopup('Connecing to the myGes account')
+    stillPopup('Connecting to the myGes account')
     log('Connectiong to the myGes account')
 
     const forked = fork('./src/modules/retrieveSchedule.js');
@@ -64,10 +64,11 @@ async function refreshingSchedule1(startD = null, endD = null){
             }
             else if(typeof(msg) === "object"){
                 object = msg
+                console.log(msg)
             }
             else{
                 lastMsg = msg
-                //console.log(msg)
+                console.log(msg)
                 log(msg)
                 stillPopup(msg)
             }
@@ -100,9 +101,7 @@ async function refreshingSchedule1(startD = null, endD = null){
         if(yearOfDate > currYear){
             nextYearSchedule[date] = object[date]
         }else{
-            if(!appendSchedule[date]){
-                appendSchedule[date] = object[date]
-            }
+            appendSchedule[date] = object[date]
         }
     }
 
@@ -123,6 +122,8 @@ function printBigSchedule(){
     const year = getYear()
     const agendaJson = readJsonFile(`./src/data/${year}_agenda.json`)
     const containerAbs = document.getElementById('allContainerAbsences')
+
+    let countCoursForZoomAgenda = 0;
 
     if(!agendaJson){
         const dayDiv = document.createElement("div")
@@ -157,7 +158,7 @@ function printBigSchedule(){
 
     // Check if there is a lesson the next 5 days
     let printAgenda = []
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 7; i++) {
         nextLessonDay = todayDate(i)[0]
         day = todayDate(i)[1]
         if(agendaJson[nextLessonDay]){
@@ -173,7 +174,7 @@ function printBigSchedule(){
         dayDivTitle.classList.add('textCenter')
         dayDivTitle.classList.add('underline')
         log('No Lessons')
-        dayDivTitle.textContent = "No lesson for the 5th next days"
+        dayDivTitle.textContent = "No lesson for the 7th next days"
         containerAbs.innerHTML = ""
         containerAbs.appendChild(dayDivTitle)
     }
@@ -188,7 +189,9 @@ function printBigSchedule(){
             dayDivTitle.classList.add('textCenter')
             dayDivTitle.classList.add('underline')
             
-            day = todayDate(i)[1]
+            // console.log(todayDate(i))
+            // console.log(getDateInfo(printAgenda[i])[1])
+            day = getDateInfo(printAgenda[i])[1]
             dayDivTitle.textContent = day + " " + printAgenda[i]
             dayDiv.appendChild(dayDivTitle)
 
@@ -201,21 +204,37 @@ function printBigSchedule(){
                 
                 lessonDiv.classList.add('lesson')
                 lessonDiv.classList.add('animatedBox')
-                lessonDiv.setAttribute('onclick', `zoomAgenda(${i})`);
-                
+                lessonDiv.setAttribute('onclick', `zoomAgenda(${countCoursForZoomAgenda})`);
+                countCoursForZoomAgenda++
                 lessonHourDiv.classList.add('underline')
 
                 lessonDiv.appendChild(lessonHourDiv)
                 lessonDiv.appendChild(lessonContentDiv)
 
                 lessonHourDiv.textContent = cours[i].time;
-                const tmp = `<div class="flex flexCenter wrap marginBottom10">
-                    <span class="underline bold width100">${cours[i].content.name}</span><span class="bold width100">${cours[i].content.modality} (Erard 12)</span>
+
+                let salle = `(${cours[i].content.campus} : ${cours[i].content.room})`
+                let tmp = ""
+                if (cours[i].content.campus == "N/A" || cours[i].content.room == "N/A"){
+                    tmp = `<div class="flex flexCenter wrap marginBottom10">
+                    <span class="underline bold width100">${cours[i].content.name}</span><span class="bold width100">Salle : Non définie</span>
                     </div><br><br>
                     <span class="underline">Type</span> : ${cours[i].content.type}<br>
+                    <span class="underline">Modalité</span> : ${cours[i].content.modality}<br>
                     <span class="underline">Professeur</span> : ${cours[i].content.teacher}<br>
                     <span class="underline">Classe</span> : ${cours[i].content.student_group_name}
                     `
+                }
+                else{
+                    tmp = `<div class="flex flexCenter wrap marginBottom10">
+                    <span class="underline bold width100">${cours[i].content.name}</span><span class="bold width100">${salle}</span>
+                    </div><br><br>
+                    <span class="underline">Type</span> : ${cours[i].content.type}<br>
+                    <span class="underline">Modalité</span> : ${cours[i].content.modality}<br>
+                    <span class="underline">Professeur</span> : ${cours[i].content.teacher}<br>
+                    <span class="underline">Classe</span> : ${cours[i].content.student_group_name}
+                    `
+                }
 
                 lessonContentDiv.innerHTML = tmp
                 
