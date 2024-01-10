@@ -48,6 +48,18 @@ async function changeLoginPassword(){
     connection.classList.add('active')
 }
 
+async function deleteOldData(){
+    const { popup } = await import('../modules/popup.js')
+    popup("Under contruction")
+}
+
+async function deconnectionFromMyges(){
+    const { replaceValueJsonFile } = await import('../modules/globalFunction.js')
+    replaceValueJsonFile('./src/data/infos.json', "login", "")
+    replaceValueJsonFile('./src/data/infos.json', "password", "")
+    loadPageH("cya")
+    changeLoginPassword()
+}
 // ------------ Retrieve clicks event on all pages --------- //
 
 // Waiting for clicks
@@ -125,6 +137,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
             infos.password = password.value
             writeJsonFile("./src/data/", "infos.json", infos)
             popup("Login et MdP sauvegardé !")
+            loadPageH('dashboard')
         }
         else{
             log("Impossible to reach the infos.json file, creating it")
@@ -133,6 +146,8 @@ document.addEventListener("DOMContentLoaded", async (event) => {
                 "password": password.value
             }
             writeJsonFile("./src/data/", "infos.json", data)
+            popup("Login et MdP sauvegardé !")
+            loadPageH('dashboard')
         }
         //remove the things
         connection.classList.remove('active')
