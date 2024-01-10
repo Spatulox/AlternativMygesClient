@@ -60,13 +60,50 @@ function printRecapSchedule(){
     let day = todayDate()[1]
     let isLesson = false
 
+    let localHour = new Date().getHours();
+    let localmin = new Date().getMinutes();
+
+    // Select the last content to check if there another lesson after
+    // if(localHour >= 19){
+    //     indice = 1
+    // }
+
     // Check if there is a lesson the next 5 days
-    for (let i = 0; i < 5; i++) {
+    let i = 0
+    for (i = 0; i < 7; i++) {
         nextLessonDay = todayDate(i)[0]
         day = todayDate(i)[1]
+
+
         if(agendaJson[nextLessonDay]){
-            isLesson = true
-            break
+
+            //Check the time
+            let lessons = agendaJson[nextLessonDay].cours
+            // Take the last element (stored in hour order)
+            let lastElement = lessons[lessons.length - 1]
+
+            const parts = nextLessonDay.split('/');
+            const day = parseInt(parts[0], 10);
+            const month = parseInt(parts[1], 10);
+            const year = parseInt(parts[2], 10);
+            const time = lastElement.content.time.split(':')
+            
+            // Create the date object according to the jsonfile lesson day
+            let currLessondateHour = new Date(year, month - 1, day);
+
+            if(!lastElement.content.name.includes("OPEN")){
+                currLessondateHour.setHours(parseInt(time[0]) + 1, parseInt(time[1]) + 30, time[2])
+            }
+            else{
+                currLessondateHour.setHours(parseInt(time[0]) + 4, time[1], time[2])
+            }
+            
+            // Take the curr date to compare it with the next lesson in the schedule
+            let date = new Date()
+            if(date <= currLessondateHour){
+                isLesson = true
+                break
+            }
         }
         else{
             isLesson = false
@@ -82,7 +119,7 @@ function printRecapSchedule(){
 
     if(isLesson == false){
         log('No Lessons')
-        dayDivTitle.textContent = "No lesson for the 5th next days"
+        dayDivTitle.textContent = "No lesson for the 7th next days"
         dayDiv.appendChild(dayDivTitle)
     }
     else{
@@ -105,13 +142,29 @@ function printRecapSchedule(){
             lessonDiv.appendChild(lessonContentDiv)
 
             lessonHourDiv.textContent = cours[i].time;
-            const tmp = `<div class="flex flexCenter wrap marginBottom10">
-                <span class="underline bold width100">${cours[i].content.name}</span><span class="bold width100">${cours[i].content.modality} (Erard 12)</span>
+
+            let salle = `(${cours[i].content.campus} : ${cours[i].content.room})`
+            let tmp = ""
+            if (cours[i].content.campus == "N/A" || cours[i].content.room == "N/A"){
+                tmp = `<div class="flex flexCenter wrap marginBottom10">
+                <span class="underline bold width100">${cours[i].content.name}</span><span class="bold width100">Salle : Non définie</span>
                 </div><br><br>
                 <span class="underline">Type</span> : ${cours[i].content.type}<br>
+                <span class="underline">Modalité</span> : ${cours[i].content.modality}<br>
                 <span class="underline">Professeur</span> : ${cours[i].content.teacher}<br>
                 <span class="underline">Classe</span> : ${cours[i].content.student_group_name}
                 `
+            }
+            else{
+                tmp = `<div class="flex flexCenter wrap marginBottom10">
+                <span class="underline bold width100">${cours[i].content.name}</span><span class="bold width100">${salle}</span>
+                </div><br><br>
+                <span class="underline">Type</span> : ${cours[i].content.type}<br>
+                <span class="underline">Modalité</span> : ${cours[i].content.modality}<br>
+                <span class="underline">Professeur</span> : ${cours[i].content.teacher}<br>
+                <span class="underline">Classe</span> : ${cours[i].content.student_group_name}
+                `
+            }
 
             lessonContentDiv.innerHTML = tmp
             
@@ -373,6 +426,8 @@ function printRecapGrades(){
 // ---------------------------------------------------------- //
 
 export function dashboard(){
+    const element = document.getElementById("firstTime");
+    element.remove();
     recapSchedule()
     recapAbsences()
     recapGrades()
