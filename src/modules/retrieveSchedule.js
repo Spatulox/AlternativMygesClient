@@ -8,7 +8,7 @@
 
 import { loginUser } from "./overlayMyGES.js"
 import { readJsonFile, getWeekMonday, getWeekSaturday } from "./childProcessGlobalFunctions.js"
-import { getYear } from "./globalFunction.js"
+import { getYear, todayDate } from "./globalFunction.js"
 
 async function Agenda(user, startD, endD){
 	process.send('Request myGes Agenda')
@@ -145,7 +145,7 @@ async function Agenda(user, startD, endD){
 
 }
 
-async function retrieveScheduleFromMyGES(){
+export async function retrieveScheduleFromMyGES(){
     let tmp = await readJsonFile('./src/data/infos.json')
 
     const username = tmp.login
@@ -167,17 +167,18 @@ async function retrieveScheduleFromMyGES(){
     let monday = new Date(getWeekMonday())
     let saturday = new Date(getWeekSaturday())
 
-    // If I set 0 to hours, saturday it set to saturday 22h :/
+    // Set saturday to 00:00 hour
     saturday.setUTCHours(0, 0, 0, 0);
 
-    if (today >= saturday){
-        process.send(`It's the weekend today, requesting next week schedule (print it, if it's sunday)`)
+	const dateString = todayDate()[1]
+	// If today >= Friday
+    if (today >= saturday || dateString == "Vendredi"){
+        process.send(`Requesting next week schedule`)
 
         monday.setUTCHours(0,0,0,0)
         monday.setDate(monday.getDate() + 7);
         monday.setUTCHours(0,0,0,0)
 
-        // console.log(saturday)
         saturday.setDate(saturday.getDate() + 7);
 
     }
@@ -198,5 +199,4 @@ async function retrieveScheduleFromMyGES(){
 
 }
 
-await retrieveScheduleFromMyGES()
-//process.send(true);
+ await retrieveScheduleFromMyGES()
