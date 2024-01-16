@@ -3,6 +3,8 @@ import { dirname } from 'path';
 import path from 'path'
 import { fileURLToPath } from 'url';
 import { log } from './src/modules/globalFunction.cjs';
+import { Client } from 'discord-rpc';
+import config from './config.json' assert { type: 'json' };
 
 
 // ------------------------------------------------------------------
@@ -58,3 +60,29 @@ app.on('window-all-closed', async () => {
     }
     log("Window closed")
 })
+
+
+// ------------------------------------------------------------------
+// --- Rich Discord Presence part --- //
+
+const rpc = new Client({ transport: 'ipc' })
+const clientId = config.clientId
+rpc.login({ clientId }).catch(console.error)
+
+rpc.on('ready', () => {
+    rpc.setActivity({
+        details: 'Non official MyGes client',
+        largeImageKey: 'ges_logo',
+        largeImageText: 'GES_logo',
+        //smallImageKey: 'nom_de_votre_image_petite',
+        //smallImageText: 'Texte de survol de l\'image petite',
+        buttons: [
+            { label: 'Obtenez le logiciel', url: 'https://github.com/Spatulox/AlternativMygesClient/releases' }
+          ],
+        instance: false,
+    });
+});
+
+rpc.on('error', (error) => {
+    log(`ERROR : Impossible to connect the app to the discord RPC : ${error}`)
+});
