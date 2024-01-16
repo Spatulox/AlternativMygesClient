@@ -20,7 +20,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
             "theme": "",
             "pendingSchedule":"false",
             "pendingAbsences":"false",
-            "pendingGrades":"false"
+            "pendingGrades":"false",
+            "clientId":"1196836862447329351"
           })
     }
     else{
