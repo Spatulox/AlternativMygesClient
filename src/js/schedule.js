@@ -27,8 +27,8 @@ export async function refreshingSchedule(startDate = null, endDate = null){
     try{
         await refreshingSchedule1(startDate, endDate)
     }
-     catch{
-         log('Error when refreshingSchedule1()')
+     catch (err){
+         log(`Error when refreshingSchedule1() : ${err}`)
     }
     
     replaceValueJsonFile('./config.json', "pendingSchedule", "false")
@@ -64,7 +64,7 @@ async function refreshingSchedule1(startD = null, endD = null){
             }
             else if(typeof(msg) === "object"){
                 object = msg
-                console.log(msg)
+                //console.log(msg)
             }
             else{
                 lastMsg = msg
@@ -74,6 +74,10 @@ async function refreshingSchedule1(startD = null, endD = null){
             }
         });
     });
+
+    // Try to bypass the child process...
+    // const { retrieveScheduleFromMyGES } = require("./src/modules/retrieveSchedule.js")
+    // await retrieveScheduleFromMyGES()
 
     let { lastMsg, object } = waitForChildMessage;
     lastMsg += ""
@@ -94,6 +98,20 @@ async function refreshingSchedule1(startD = null, endD = null){
     // Create the var to write the correct files
     let nextYearSchedule = {}
 
+    // Delete the day of schedule of not exist anymore in the online schedule
+    for (let i = 0; i < 7; i++) {
+
+        // Take the date (string)
+        let dateTmp = todayDate(i)[0]
+
+        if(!object.hasOwnProperty(dateTmp)){
+            if(appendSchedule[dateTmp]){
+                delete appendSchedule[dateTmp];
+            }
+        }
+    }
+
+    // Boucle on the object elements to add it into the appendSchedule 
     for (let date in object){
         let yearOfDate = new Date(date).getFullYear();
 
