@@ -67,6 +67,8 @@ app.on('window-all-closed', async () => {
 
 const rpc = new Client({ transport: 'ipc' })
 const clientId = config.clientId
+
+// .catch need to call a setInterval fonction to try to connect to Discord RPC
 rpc.login({ clientId }).catch(console.error)
 
 rpc.on('ready', () => {
@@ -85,4 +87,7 @@ rpc.on('ready', () => {
 
 rpc.on('error', (error) => {
     log(`ERROR : Impossible to connect the app to the discord RPC : ${error}`)
+    setTimeout(()=>{
+        rpc.login({ clientId }).catch(console.error)
+    }, 10000);
 });
