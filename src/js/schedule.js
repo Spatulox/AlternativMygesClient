@@ -28,7 +28,8 @@ export async function refreshingSchedule(startDate = null, endDate = null){
         await refreshingSchedule1(startDate, endDate)
     }
      catch (err){
-         log(`Error when refreshingSchedule1() : ${err}`)
+        console.log(err)
+        log(`Error when refreshingSchedule1() : ${err}`)
     }
     
     replaceValueJsonFile('./config.json', "pendingSchedule", "false")
@@ -50,7 +51,7 @@ async function refreshingSchedule1(startD = null, endD = null){
     }
 
     stillPopup('Connecting to the myGes account')
-    log('Connectiong to the myGes account')
+    log('Connection to the myGes account')
 
     const forked = fork('./src/modules/retrieveSchedule.js');
 
@@ -68,7 +69,7 @@ async function refreshingSchedule1(startD = null, endD = null){
             }
             else{
                 lastMsg = msg
-                console.log(msg)
+                //console.log(msg)
                 log(msg)
                 stillPopup(msg)
             }

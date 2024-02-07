@@ -191,6 +191,7 @@ export async function retrieveScheduleFromMyGES(){
     // // console.log(saturday)
     // saturday.setDate(saturday.getDate() + 7);
 
+	// I think it's useless
     let agenda = Agenda(user, monday, saturday)
     if(!agenda){
         process.send(agenda)
