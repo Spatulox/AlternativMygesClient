@@ -1,4 +1,4 @@
-import { getYear, log, readJsonFile, replaceValueJsonFile } from "../modules/globalFunction.js";
+import { getYear, log, readJsonFile, replaceValueJsonFile, writeJsonFile } from "../modules/globalFunction.js";
 import { popup, stillPopup, stopStillPopup } from "../modules/popup.js";
 import { checkXTimesInternetConnection } from "../modules/checkInternetCo.js";
 
@@ -114,6 +114,7 @@ export function createTableGrades(Grades, maxColumns, thing = null){
             for (let j = 0; j < newGradesVar.length; j++) {
                 if(thing != "big"){
                     
+                    //console.log(newGradesVar[j])
                     if(typeof(newGradesVar[j]) !== "string"){
 
                         var row = document.createElement("tr");
@@ -127,7 +128,19 @@ export function createTableGrades(Grades, maxColumns, thing = null){
                         cellCoef.appendChild(document.createTextNode(Grades[i].coef))
                         row.appendChild(cellCoef)
                     }
-                    else if(typeof(note) === "string" && note.includes('no new')){
+                    else if(typeof(note) === "string" && newGradesVar[j].includes('no new')){
+                        var row = document.createElement("tr");
+                        let cellMatiere = document.createElement("td");
+                        cellMatiere.appendChild(document.createTextNode(Grades[i].course));
+                        row.appendChild(cellMatiere);
+                        
+
+                        let cellCoef = document.createElement("td")
+                        cellCoef.classList.add("bold")
+                        cellCoef.appendChild(document.createTextNode(Grades[i].coef))
+                        row.appendChild(cellCoef)
+                    }
+                    else if(typeof(newGradesVar[j]) === "string" && newGradesVar[j].includes('replaced')){
                         var row = document.createElement("tr");
                         let cellMatiere = document.createElement("td");
                         cellMatiere.appendChild(document.createTextNode(Grades[i].course));
@@ -181,6 +194,7 @@ export function createTableGrades(Grades, maxColumns, thing = null){
                 span.appendChild(document.createTextNode(note))
                 cellNote.appendChild(span)
                 row.appendChild(cellNote)
+
             }
             else if(typeof(note) === "string" && note.includes('no new') && thing == "big"){
                 let cellNote = document.createElement("td")
@@ -225,7 +239,7 @@ export function createTableGrades(Grades, maxColumns, thing = null){
 // Get schedule from myges website
 
 // This function exist to avoid to forget a replaceValueJsonFile when doing a retur inside the refreshingGrades1()
-export async function refreshingGrades(startDate = null, endDate = null){
+export async function refreshingGrades(){
     
     // Check if there's already a check
     const tmp = readJsonFile('./config.json')
@@ -237,16 +251,18 @@ export async function refreshingGrades(startDate = null, endDate = null){
 
     replaceValueJsonFile('./config.json', "pendingGrades", "true")
     try{
-        await refreshingGrades1(startDate, endDate)
+        await refreshingGrades1()
     }
     catch{
-        log('Error when refreshingSchedule1()')
+        log('Error when refreshingGrades1()')
     }
     
     replaceValueJsonFile('./config.json', "pendingGrades", "false")
 }
 
-async function refreshingGrades1(startDate = null, endDate = null){
+async function refreshingGrades1(){
+    const { fork } = require('child_process')
+
     stillPopup('Checking internet')
 
     //let tmp = 
@@ -256,14 +272,53 @@ async function refreshingGrades1(startDate = null, endDate = null){
         stopStillPopup()
     }
     else{
-        //popup('Internet co !')
         stillPopup('Connecting to myGes api')
     }
 
-    console.log('refreshing grades')
+    stillPopup('Connecting to the myGes account')
+    log('Connection to the myGes account')
 
+    const forked = fork('./src/modules/retrieveGrades.js');
+
+    const waitForChildMessage = await new Promise((resolve) => {
+        var lastMsg
+        var object = null
+        forked.on('message', (msg) => {
+
+            if(msg == true || msg == false){
+                resolve({ lastMsg, object }); // Résoudre la promesse avec le message du processus enfant
+            }
+            else if(typeof(msg) === "object"){
+                object = msg
+                console.log(msg)
+            }
+            else{
+                lastMsg = msg
+                //console.log(msg)
+                log(msg)
+                stillPopup(msg)
+            }
+        });
+    });
+
+    let { lastMsg, object } = waitForChildMessage;
+    lastMsg += ""
+    popup(lastMsg);
+    log(lastMsg);
+    
     
     // Write the file
+    let date = new Date()
+	let year = date.getFullYear();
+    let Grades = readJsonFile(`./src/data/${year}_grades.json`)
+
+    if (JSON.stringify(Grades) != JSON.stringify(object)){
+        await writeJsonFile(`./src/data`, `${year}_lastGrades.json`, Grades)
+        await writeJsonFile(`./src/data`, `${year}_grades.json`, object)
+    }
+    else{
+        log("No new grades")
+    }
 
 
     stopStillPopup()
