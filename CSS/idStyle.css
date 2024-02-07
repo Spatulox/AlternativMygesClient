@@ -206,7 +206,7 @@
 }
 
 #recapAbsences div div, #recapGrades div div{
-    max-height: 150px;
+    max-height: 250px;
     overflow: auto;
     display: flex;
     justify-content: center;
