@@ -6,16 +6,16 @@
 }
 
 .light{
-    --rightPartColor: #277abe;
+    --rightPartColor: #364156;
     --mainPartColor: rgb(212, 212, 212);
-	--colorMain: #E6E6E6;
+	--colorMain: #9F9E9E;
     --policeColor : white;
     --mainPoliceColor : black;
     /* --popupColor : rgb(168, 168, 168);
     --boxBackgroundColor : #a8a8a8; */
     
-    --popupColor : #277abe;
-    --boxBackgroundColor : #569dd6;
+    --popupColor : #364156;
+    --boxBackgroundColor : #536483;
 
 }
 
