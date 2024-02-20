@@ -53,10 +53,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
     }
 
     if(theme.classList == 'light'){
-        themeImg.src = './src/images/black-moon.png'
+        themeImg.src = './src/images/black-sun.png'
     }
     else{
-        themeImg.src = './src/images/black-sun.png'
+        themeImg.src = './src/images/black-moon.png'
     }
 
 

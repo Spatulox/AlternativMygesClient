@@ -83,11 +83,11 @@ document.addEventListener("DOMContentLoaded", async (event) => {
     lightDark.addEventListener('click', function() {
 
         if(body.classList == 'light'){
-            lightDark.src = "./src/images/black-sun.png"
+            lightDark.src = "./src/images/black-moon.png"
             replaceValueJsonFile("./config.json", "theme", "dark")
         }
         else{
-            lightDark.src = "./src/images/black-moon.png"
+            lightDark.src = "./src/images/black-sun.png"
             replaceValueJsonFile("./config.json", "theme", "light")
         }
 
