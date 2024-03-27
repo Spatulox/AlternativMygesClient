@@ -446,16 +446,8 @@ function printBigGrades(){
         let tmp = document.createElement('hr')
         semester2ID.appendChild(tmp)
     }
-   
-    //popup(maxColumns)
-
-    //console.log(Grades)
-
-    const numObjects = Object.keys(Grades).length;
-    popup(numObjects)
 }
 // Read the local file and print it inside the software in grades page
 export function grades(){
-    //refreshingGrades()
-    printBigGrades()
+    refreshingGrades()
 }
