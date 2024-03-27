@@ -99,6 +99,7 @@
 
 #allContainerDashboard{
     height: var(--mainPartHeight);
+    height: 100%;
     box-sizing: border-box;
 }
 
@@ -222,6 +223,33 @@
 #recapAbsences tbody, #recapGrades tbody{
     background-color: lightgrey;
     color: black;
+}
+
+#replace{
+    min-height: 100%;
+}
+
+#semester1 h1, #semester2 h1{
+    text-align: center;
+}
+
+#semester1 table, #semester2 table{
+    margin: auto;
+    width: 650px;
+}
+
+#semester1 thead, #semester2 thead{
+    background-color: white;
+    color: black;
+}
+
+#semester1 tbody, #semester2 tbody{
+    background-color: lightgrey;
+    color: black;
+}
+
+#semester2 hr{
+    margin-top: 30px;
 }
 
 #stillpopup div{

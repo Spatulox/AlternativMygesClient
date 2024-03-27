@@ -176,6 +176,14 @@
     margin-bottom: 10px;
 }
 
+.marginTop40{
+    margin-top: 40px;
+}
+
+.marginBottom40{
+    margin-bottom: 40px;
+}
+
 .marginTopBottom8Pourcent{
     margin: 8% 0;
 }
@@ -200,7 +208,7 @@
 
     box-shadow: -2px 2px 5px #000000;
 
-    border-radius: 10px;
+    border-radius: 10px;    
     padding: 10px;
     background-color: var(--popupColor);
     color : var(--policeColor);
