@@ -431,5 +431,6 @@ export function dashboard(){
     recapSchedule()
     recapAbsences()
     recapGrades()
+    log('Dashboad loaded !')
     
 }

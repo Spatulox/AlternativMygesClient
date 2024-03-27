@@ -73,7 +73,7 @@ rpc.login({ clientId }).catch(console.error)
 
 rpc.on('ready', () => {
     rpc.setActivity({
-        details: 'Non official MyGes client',
+        details: 'Unofficial MyGes client',
         largeImageKey: 'ges_logo',
         largeImageText: 'GES_logo',
         //smallImageKey: 'nom_de_votre_image_petite',
