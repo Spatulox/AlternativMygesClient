@@ -77,6 +77,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
     const popupVar = document.querySelector('#normalpopup > div');
     const buttonEula = document.getElementById('buttonEula')
     const buttonConnection = document.getElementById('buttonConnection')
+    const buttonCancelConnection = document.getElementById('buttonCancelConnection')
     
 
     //---------------- Header events ---------------- //
@@ -151,6 +152,12 @@ document.addEventListener("DOMContentLoaded", async (event) => {
         }
         //remove the things
         connection.classList.remove('active')
+
+    })
+
+    buttonCancelConnection.addEventListener('click', function() {
+        const connection = document.getElementById('connection')
+        connection.classList.remove("active")
 
     })
 
