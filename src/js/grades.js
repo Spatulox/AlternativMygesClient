@@ -450,4 +450,5 @@ function printBigGrades(){
 // Read the local file and print it inside the software in grades page
 export function grades(){
     refreshingGrades()
+    printBigGrades()
 }
