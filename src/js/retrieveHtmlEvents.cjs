@@ -160,24 +160,133 @@ document.addEventListener("DOMContentLoaded", async (event) => {
         connection.classList.remove("active")
 
     })
-
+      
 
 
 
     //------------ document events -----------//
     // Used to close "zooms"/"detailled" elements
+    // Use to open / close the new event tab on schedule.html
 
     document.addEventListener('click', function(e) {
         const lessons = document.querySelectorAll('.lesson');
         const lessonsArray = Array.from(lessons);
-    
+        const plusAddEvent = document.getElementById('plusAddEvent')
+        const plusAddEventImg = document.getElementById('plusAddEventImg')
         const isClickInsideLesson = lessonsArray.some(lesson => lesson.contains(e.target));
+
+        const validerEvent = document.getElementById('validerEvent')
+
+        if(e.target.id == validerEvent.id){
+            const inputs = document.querySelectorAll('#plusAddEvent input');
+            const textDesc = document.getElementsByTagName('textarea')[0];
+
+            let inputDic = {}
+            inputs.forEach((input, index) => {
+                if (index < inputs.length - 1) {
+                  inputDic[input.name] = input.value
+                }
+              });
+
+            inputDic["description"] = textDesc.value
+
+            if(isNaN(new Date (inputDic.date))){
+                popup("Il faut mettre une date valide")
+                log("Wrong date format")
+                return
+            }
+
+            if (new Date (inputDic.date) < new Date()){
+                popup('Impossible de créer un évènement avant aujourd\'hui')
+                return
+            }
+
+            if(isNaN(parseInt(inputDic.hour)) || isNaN(parseInt(inputDic.minutes))){
+                popup("Il faut mettre des nombres pour les heures et les minutes")
+                log("Wrong hour and/or minutes format")
+                return
+            }
+
+            
+            inputDic.date = inputDic.date.replace(/-/g, "/");
+            //console.log(date)
+            hour = inputDic.hour + ":" + inputDic.minutes + ":00"
+            let color = inputDic.color
+            let description = inputDic.description
+            
+            const template = {
+                date: {
+                    [hour]: {
+                        color: color,
+                        description: description
+                    }
+                }
+            };
+
+            let data = readJsonFile("./src/data/reminder.json")
+
+            if(!data){
+                data = {}
+                data[inputDic.date] = template.date
+                writeJsonFile("./src/data/", "reminder.json", data)
+            }
+            else{
+                if(data.hasOwnProperty(inputDic.date)){
+                    if(data[inputDic.date].hasOwnProperty(hour)){
+                        popup('Vous avez déjà un évènement à cette date et heure')
+                        return
+                    }
+                    console.log(data[inputDic.date])
+                    data[inputDic.date][hour] = template.date[hour]
+                }
+                else{
+                    data[inputDic.date] = template.date
+                }
+                
+                writeJsonFile("./src/data/", "reminder.json", data)
+                popup('Rappel enregistré !')
+            }
+
+            popup('Rappel enregistré !')
+
+            // Close the popup to create event
+            plusAddEvent.classList.remove('active')
+            plusAddEventImg.src = "./src/images/plus_logo_noir.png"
+
+            // Remove informations
+            inputs.forEach((input, index) => {
+                if (index < inputs.length - 1) {
+                  input.value = ""
+                }
+              });
+            textDesc.value = ""
+
+            return
+
+        }
     
         if (!isClickInsideLesson) {
             lessonsArray.forEach(lesson => {
                 lesson.classList.remove('bigAgenda');
             });
         }
+
+        try{
+            if (e.target.closest('#plusAddEvent')) {
+                // L'élément ou l'un de ses parents a l'id "plusAddEvent"
+                plusAddEvent.classList.add('active')
+                plusAddEventImg.src = "./src/images/GES_logo.png"
+            } else {
+                console.log("YEEET")
+                plusAddEvent.classList.remove('active')
+                plusAddEventImg.src = "./src/images/plus_logo_noir.png"
+                // L'élément n'a pas l'id "plusAddEvent" et n'a pas d'ancêtres avec cet id
+            }
+        }
+        catch{
+            console.log("No plusAddEvent tag")
+        }       
+
     });
     
 })
