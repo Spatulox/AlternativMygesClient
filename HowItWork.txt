@@ -25,3 +25,11 @@ dashboard.js qui apelle une fonction refreshSchedule qui check si y'a déjà un 
 Si il n'y a pas de refresh en cours : apelle refreshingSchedule 1 qui execute un fichier dans un autre process.
 Ce sous process envoie des message au process parent via "process.send()"/
 Le prossecus principal execute des "log()" et des "popup()" ou du stockage de donnée en fonction de ce que le sous process envoie.
+
+
+
+
+
+
+############################################ PROBLÈMES CONNUS ############################################
+Lorsqu'on se connecte puis on se déconnecte avec autre compte (qui ne fonctionne pas), ca réécrit les notes, et ca baise tout :/
