@@ -208,7 +208,10 @@ document.addEventListener("DOMContentLoaded", async (event) => {
             }
 
             
-            inputDic.date = inputDic.date.replace(/-/g, "/");
+            //inputDic.date = inputDic.date.replace(/-/g, "/");
+
+            let tmp = inputDic.date.split('-')
+            inputDic.date = tmp[2]+"/"+tmp[1]+"/"+tmp[0]
             //console.log(date)
             hour = inputDic.hour + ":" + inputDic.minutes + ":00"
             let color = inputDic.color
