@@ -99,7 +99,6 @@ export function createTableGrades(Grades, maxColumns, thing = null, semesterNum 
         return false
     }
 
-    console.log(semesterNum)
     let tmpSemester = 1
     // Auto detect the semester
     if(semesterNum === "N/A"){
@@ -135,7 +134,7 @@ export function createTableGrades(Grades, maxColumns, thing = null, semesterNum 
         if(Grades[i].trimester_name.includes(semesterNum)){
 
             let newGradesVar = newGrades(Grades[i].course)
-            console.log(newGradesVar)
+            //console.log(newGradesVar)
             if(!newGradesVar){
                 return false
             }
@@ -324,7 +323,7 @@ async function refreshingGrades1(){
             }
             else if(typeof(msg) === "object"){
                 object = msg
-                console.log(msg)
+                //console.log(msg)
             }
             else{
                 lastMsg = msg
