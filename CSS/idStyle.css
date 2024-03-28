@@ -44,6 +44,79 @@
     background-color: var(--rightPartColor);
 }
 
+#plusAddEvent{
+    background-color: var(--mainPartColor);
+    color: var(--mainPoliceColor);
+    width: 80px;
+    height: 80px;
+    position: fixed;
+    right: 40px;
+    bottom: 30px;
+
+    border-radius: 35%;
+    transition: all 0.4s ease-in-out;
+
+    overflow: hidden;
+}
+
+#plusAddEvent::-webkit-scrollbar {
+    display: none;
+}
+
+#plusAddEvent img{
+    width: 50px;
+    height: auto;
+
+    position: absolute;
+    bottom: 15px;
+    right: 15px
+}
+
+#plusAddEvent div {
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+#plusAddEvent.active div {
+    opacity: 1;
+    transition: opacity 0.8s ease-in-out;
+}
+
+#plusAddEvent.Active img{
+    width: 50px;
+    height: auto;
+
+    position: sticky;
+    bottom: 15px;
+    left: 100%;
+}
+
+#plusAddEvent:hover{
+    transition: all 0.4s ease-in-out;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+#plusAddEvent.active{
+    width: 40vw;
+    height: 65vh;
+    right: calc(var(--mainPartWidth) - 63vw);
+    bottom: calc(15vh);
+    transition: all 0.8s ease-in-out;
+
+    border-radius: 10%;
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+
+    overflow: auto;
+}
+
+#plusAddEvent.active:hover{
+    transform: inherit;
+    cursor: inherit;
+}
+
 #rightPart ul{
     padding: 0px;
 }

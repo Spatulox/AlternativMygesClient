@@ -176,6 +176,22 @@
     margin-bottom: 10px;
 }
 
+.marginTop20{
+    margin-top: 20px;
+}
+
+.marginBottom20{
+    margin-bottom: 20px;
+}
+
+.marginTop30{
+    margin-top: 30px;
+}
+
+.marginBottom30{
+    margin-bottom: 30px;
+}
+
 .marginTop40{
     margin-top: 40px;
 }
@@ -243,6 +259,14 @@
     text-decoration: underline;
 }
 
+.height20{
+    height: 20%;
+}
+
+.height50{
+    height: 50%;
+}
+
 .height80{
     height: 80%;
 }
@@ -251,12 +275,24 @@
     height: 100%;
 }
 
+.width20{
+    width: 20%;
+}
+
+.width50{
+    width: 50%;
+}
+
 .width80{
     width: 80%;
 }
 
 .width100{
     width: 100%;
+}
+
+.widthAuto{
+    width: auto;
 }
 
 .wrap{
