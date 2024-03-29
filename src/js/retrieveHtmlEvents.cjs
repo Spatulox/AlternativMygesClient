@@ -27,6 +27,13 @@ async function refreshSchedule(){
     refreshingSchedule()
 }
 
+async function RePrintSchedule(){
+    const { printBigSchedule } = await import('../js/schedule.js')
+    setTimeout(() => {
+        printBigSchedule()
+    }, 1000)
+}
+
 async function refreshAbsences(){
     const { refreshingAbsences } = await import('../js/absences.js')
     refreshingAbsences()

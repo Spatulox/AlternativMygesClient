@@ -137,7 +137,7 @@ async function refreshingSchedule1(startD = null, endD = null){
     return false
 }
 
-function printBigSchedule(){
+export function printBigSchedule(){
 
     const year = getYear()
     const agendaJson = readJsonFile(`./src/data/${year}_agenda.json`)
