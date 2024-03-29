@@ -20,16 +20,18 @@ export function newGrades(string = null, semester = 1)
     // Lack of one file
     if(!lastGrades){
         log('No lastGrade.json')
-        return false
+        if(Grades){
+            writeJsonFile('./src/data/', `${year}_lastGrades.json`, Grades)
+            lastGrades = Grades
+        }
+        else{
+            return false
+        }
+        
     }
 
     if(!Grades){
         log('No grades.json')
-        return false
-    }
-
-    // The file are the same
-    if(JSON.stringify(Grades) == JSON.stringify(lastGrades)){
         return false
     }
 
@@ -95,6 +97,7 @@ export function createTableGrades(Grades, maxColumns, thing = null, semesterNum 
     let tbody = document.createElement("tbody");
 
     let newGradesVar = newGrades(Grades[0].course)
+    console.log(newGradesVar)
     if(!newGradesVar){
         return false
     }
@@ -367,6 +370,34 @@ function printBigGrades(){
     let semester2ID = document.getElementById('semester2')
     semester1.innerHTML = "Something went wrong"
     semester2.innerHTML = "Something went wrong"
+
+    if(!Grades){
+        const dayDiv = document.createElement("div")
+        const dayDivTitle = document.createElement("h2")
+        const dayDivInput = document.createElement("input")
+
+        dayDiv.classList.add('marginAuto')
+        dayDiv.classList.add('textCenter')
+        dayDiv.style.width = "80%"
+        dayDivTitle.classList.add('textCenter')
+        dayDivTitle.classList.add('underline')
+
+        dayDivInput.classList.add('marginAuto')
+        dayDivInput.value = 'Rafraichir'
+        dayDivInput.type = 'button'
+        dayDivInput.setAttribute('onclick', `refreshGrades()`);
+
+        dayDivTitle.textContent = "Pas de notes enregistrées en local, attendez le refresh d'internet"
+        dayDiv.appendChild(dayDivTitle)
+        dayDiv.appendChild(dayDivInput)
+        semester1.innerHTML = ""
+        semester1.appendChild(dayDiv)
+
+        semester2.remove()
+
+        log('No local grades')
+        return false
+    }
 
 
     let maxColumnsSem1 = 1
