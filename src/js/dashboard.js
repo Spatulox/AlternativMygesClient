@@ -29,6 +29,7 @@ function printRecapSchedule(){
     const agenda = document.getElementById('currAgenda')
     const year = getYear()
     const agendaJson = readJsonFile(`./src/data/${year}_agenda.json`)
+    const reminder = readJsonFile(`./src/data/${year}_reminder.json`)
 
     if(!agendaJson){
         const dayDiv = document.createElement("div")
@@ -68,7 +69,7 @@ function printRecapSchedule(){
     //     indice = 1
     // }
 
-    // Check if there is a lesson the next 5 days
+    // Check if there is a lesson the next 6 days
     let i = 0
     for (i = 0; i < 7; i++) {
         nextLessonDay = todayDate(i)[0]
@@ -109,7 +110,7 @@ function printRecapSchedule(){
             isLesson = false
         }
     }
-
+    
     const dayDiv = document.createElement("div")
     const dayDivTitle = document.createElement("h2")
     dayDiv.classList.add('marginAuto')
@@ -127,6 +128,7 @@ function printRecapSchedule(){
         dayDiv.appendChild(dayDivTitle)
 
         const cours = agendaJson[nextLessonDay].cours
+
         for (let i = 0; i < cours.length; i++) {
             const lessonDiv = document.createElement("div")
             const lessonHourDiv = document.createElement("h3")
@@ -134,6 +136,7 @@ function printRecapSchedule(){
             
             lessonDiv.classList.add('lesson')
             lessonDiv.classList.add('animatedBox')
+            //lessonDiv.setAttribute('onclick', `zoomAgenda(${i+numberEvent})`);
             lessonDiv.setAttribute('onclick', `zoomAgenda(${i})`);
             
             lessonHourDiv.classList.add('underline')
@@ -423,6 +426,101 @@ function printRecapGrades(){
     }
 }
 
+
+function printRecapEvent(){
+
+    const year = getYear()
+    const recapEvent = document.getElementById('recapEvent')
+
+    const reminder = readJsonFile(`./src/data/${year}_reminder.json`)
+
+    let todayLessonDay = todayDate(0)[0]
+    let dayString = todayDate(0)[1]
+    
+
+    const dayDiv = document.createElement("div")
+    let dayDivTitle = document.createElement("h2")
+    dayDiv.classList.add('marginAuto')
+    dayDiv.style.width = "80%"
+    dayDivTitle.classList.add('textCenter')
+    dayDivTitle.classList.add('underline')
+
+    dayDivTitle.textContent = "Évènements de la journée"
+
+    dayDiv.appendChild(dayDivTitle)
+
+    const createNoEvent = (string) => {
+        const lessonDiv = document.createElement("div")
+        const lessonHourDiv = document.createElement("h3")
+        
+        lessonDiv.classList.add('lesson')
+        lessonDiv.classList.add('animatedBox')
+        lessonDiv.style.backgroundColor = "white"
+        lessonDiv.style.maxHeight = "inherit"
+        
+        lessonHourDiv.classList.add('underline')
+
+        lessonDiv.appendChild(lessonHourDiv)
+
+        lessonHourDiv.textContent = string;
+    
+        dayDiv.appendChild(lessonDiv)
+        
+        recapEvent.innerHTML = ""
+        recapEvent.appendChild(dayDiv)
+    };
+
+
+    if(!reminder){
+        createNoEvent('Pas d\'évènements')
+        return
+    }
+
+    const dailyReminder = reminder[todayLessonDay]
+
+    if(!dailyReminder){
+        createNoEvent('Pas d\'évènements')
+        return
+    }
+
+    
+    let numberEvent = 0
+    if(dailyReminder){
+
+        for (const key in dailyReminder) {
+
+            numberEvent++
+
+            const lessonDiv = document.createElement("div")
+            const lessonHourDiv = document.createElement("h3")
+            const lessonContentDiv = document.createElement("div")
+            
+            lessonDiv.classList.add('lesson')
+            lessonDiv.classList.add('animatedBox')
+            lessonDiv.style.backgroundColor = dailyReminder[key].color
+            lessonDiv.style.maxHeight = "inherit"
+            
+            lessonHourDiv.classList.add('underline')
+
+            lessonDiv.appendChild(lessonHourDiv)
+            lessonDiv.appendChild(lessonContentDiv)
+
+            lessonHourDiv.textContent = key;
+            let tmp = ""
+
+            tmp = dailyReminder[key].description
+
+            lessonContentDiv.innerHTML = tmp
+        
+            dayDiv.appendChild(lessonDiv)
+        }
+
+        recapEvent.innerHTML = ""
+        recapEvent.appendChild(dayDiv)
+       
+    }
+}
+
 // ---------------------------------------------------------- //
 
 export function dashboard(){
@@ -431,6 +529,7 @@ export function dashboard(){
     recapSchedule()
     recapAbsences()
     recapGrades()
+    printRecapEvent()
     log('Dashboad loaded !')
     
 }
