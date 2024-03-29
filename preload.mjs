@@ -8,10 +8,20 @@
 
 import { loadPage } from "./src/modules/loadPages.js";
 import { log, readJsonFile, writeJsonFile, replaceValueJsonFile } from "./src/modules/globalFunction.js";
+import fs from 'fs'
 
 document.addEventListener("DOMContentLoaded", (event) => {
     const config = readJsonFile("./config.json")
     const user = readJsonFile("./src/data/infos.json");
+
+    // Check if folders exist
+    if (!fs.existsSync('src')) {
+        fs.mkdirSync('src');
+      
+        // Créer les sous-dossiers
+        fs.mkdirSync('src/data');
+    }
+
 
     // Create the file is not exist
     if(!config){
