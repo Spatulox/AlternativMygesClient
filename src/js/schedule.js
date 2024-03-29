@@ -267,7 +267,7 @@ function printBigSchedule(){
                 lessonDiv.appendChild(lessonHourDiv)
                 lessonDiv.appendChild(lessonContentDiv)
 
-                lessonHourDiv.textContent = cours[i].time;
+                lessonHourDiv.textContent = cours[j].time;
 
                 let salle = `(${cours[j].content.campus} : ${cours[j].content.room})`
                 let tmp = ""
