@@ -200,6 +200,9 @@ function printBigSchedule(){
     }
     else{
         containerAbs.innerHTML = ""
+
+        const reminder = readJsonFile(`./src/data/${year}_reminder.json`)
+
         for (let i = 0; i < printAgenda.length; i++) {
 
             const dayDiv = document.createElement("div")
@@ -216,6 +219,39 @@ function printBigSchedule(){
             dayDiv.appendChild(dayDivTitle)
 
             const cours = agendaJson[printAgenda[i]].cours
+            const dailyReminder = reminder[printAgenda[i]]
+
+            let numberEvent = 0
+            if(dailyReminder){
+                console.log(dailyReminder)
+                for (const key in dailyReminder) {
+
+                    numberEvent++
+
+                    const lessonDiv = document.createElement("div")
+                    const lessonHourDiv = document.createElement("h3")
+                    const lessonContentDiv = document.createElement("div")
+                    
+                    lessonDiv.classList.add('lesson')
+                    lessonDiv.classList.add('animatedBox')
+                    lessonDiv.style.backgroundColor = dailyReminder[key].color
+                    lessonDiv.style.maxHeight = "inherit"
+                    
+                    lessonHourDiv.classList.add('underline')
+        
+                    lessonDiv.appendChild(lessonHourDiv)
+                    lessonDiv.appendChild(lessonContentDiv)
+        
+                    lessonHourDiv.textContent = key;
+                    let tmp = ""
+
+                    tmp = dailyReminder[key].description
+
+                    lessonContentDiv.innerHTML = tmp
+                
+                    dayDiv.appendChild(lessonDiv)
+                }
+            }
 
             for (let j = 0; j < cours.length; j++) {
                 const lessonDiv = document.createElement("div")
@@ -224,7 +260,7 @@ function printBigSchedule(){
                 
                 lessonDiv.classList.add('lesson')
                 lessonDiv.classList.add('animatedBox')
-                lessonDiv.setAttribute('onclick', `zoomAgenda(${countCoursForZoomAgenda})`);
+                lessonDiv.setAttribute('onclick', `zoomAgenda(${countCoursForZoomAgenda+numberEvent})`);
                 countCoursForZoomAgenda++
                 lessonHourDiv.classList.add('underline')
 
