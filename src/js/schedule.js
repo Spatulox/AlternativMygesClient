@@ -124,6 +124,7 @@ async function refreshingSchedule1(startD = null, endD = null){
         }
     }
 
+ 
     if (Object.keys(appendSchedule).length !== 0){
         await writeJsonFile(`./src/data/`, `${currYear}_agenda.json`, appendSchedule)
     }
@@ -216,7 +217,7 @@ function printBigSchedule(){
 
             const cours = agendaJson[printAgenda[i]].cours
 
-            for (let i = 0; i < cours.length; i++) {
+            for (let j = 0; j < cours.length; j++) {
                 const lessonDiv = document.createElement("div")
                 const lessonHourDiv = document.createElement("h3")
                 const lessonContentDiv = document.createElement("div")
@@ -232,26 +233,26 @@ function printBigSchedule(){
 
                 lessonHourDiv.textContent = cours[i].time;
 
-                let salle = `(${cours[i].content.campus} : ${cours[i].content.room})`
+                let salle = `(${cours[j].content.campus} : ${cours[j].content.room})`
                 let tmp = ""
-                if (cours[i].content.campus == "N/A" || cours[i].content.room == "N/A"){
+                if (cours[j].content.campus == "N/A" || cours[j].content.room == "N/A"){
                     tmp = `<div class="flex flexCenter wrap marginBottom10">
-                    <span class="underline bold width100">${cours[i].content.name}</span><span class="bold width100">Salle : Non définie</span>
+                    <span class="underline bold width100">${cours[j].content.name}</span><span class="bold width100">Salle : Non définie</span>
                     </div><br><br>
-                    <span class="underline">Type</span> : ${cours[i].content.type}<br>
-                    <span class="underline">Modalité</span> : ${cours[i].content.modality}<br>
-                    <span class="underline">Professeur</span> : ${cours[i].content.teacher}<br>
-                    <span class="underline">Classe</span> : ${cours[i].content.student_group_name}
+                    <span class="underline">Type</span> : ${cours[j].content.type}<br>
+                    <span class="underline">Modalité</span> : ${cours[j].content.modality}<br>
+                    <span class="underline">Professeur</span> : ${cours[j].content.teacher}<br>
+                    <span class="underline">Classe</span> : ${cours[j].content.student_group_name}
                     `
                 }
                 else{
                     tmp = `<div class="flex flexCenter wrap marginBottom10">
-                    <span class="underline bold width100">${cours[i].content.name}</span><span class="bold width100">${salle}</span>
+                    <span class="underline bold width100">${cours[j].content.name}</span><span class="bold width100">${salle}</span>
                     </div><br><br>
-                    <span class="underline">Type</span> : ${cours[i].content.type}<br>
-                    <span class="underline">Modalité</span> : ${cours[i].content.modality}<br>
-                    <span class="underline">Professeur</span> : ${cours[i].content.teacher}<br>
-                    <span class="underline">Classe</span> : ${cours[i].content.student_group_name}
+                    <span class="underline">Type</span> : ${cours[j].content.type}<br>
+                    <span class="underline">Modalité</span> : ${cours[j].content.modality}<br>
+                    <span class="underline">Professeur</span> : ${cours[j].content.teacher}<br>
+                    <span class="underline">Classe</span> : ${cours[j].content.student_group_name}
                     `
                 }
 
