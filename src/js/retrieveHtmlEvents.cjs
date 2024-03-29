@@ -66,7 +66,7 @@ async function deconnectionFromMyges(){
 document.addEventListener("DOMContentLoaded", async (event) => {
 
     // Functions
-    const { replaceValueJsonFile, readJsonFile, writeJsonFile, log } = await import('../modules/globalFunction.js');
+    const { replaceValueJsonFile, readJsonFile, writeJsonFile, log, getYear } = await import('../modules/globalFunction.js');
     const { popup } = await import('../modules/popup.js');
 
 
@@ -199,7 +199,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
                 return
             }
 
-            if (new Date (inputDic.date) < new Date()){
+            if (new Date (inputDic.date) < new Date().setUTCDate(0,0,0,0)){
                 popup('Impossible de créer un évènement avant aujourd\'hui')
                 return
             }
@@ -228,27 +228,55 @@ document.addEventListener("DOMContentLoaded", async (event) => {
             };
 
             // Check if already event exist and write informations
-            let data = readJsonFile("./src/data/reminder.json")
+            const year = getYear()
+            let data = readJsonFile(`./src/data/${year}_reminder.json`)
  
             if(!data){
                 data = {}
                 data[inputDic.date] = template.date
-                writeJsonFile("./src/data/", "reminder.json", data)
+                writeJsonFile("./src/data/", `${year}_reminder.json`, data)
             }
             else{
+                // If the same date already exist
                 if(data.hasOwnProperty(inputDic.date)){
+
+                    // If the same hour already exist
                     if(data[inputDic.date].hasOwnProperty(hour)){
                         popup('Vous avez déjà un évènement à cette date et heure')
                         return
                     }
-                    console.log(data[inputDic.date])
+                    
                     data[inputDic.date][hour] = template.date[hour]
+
+                    // Sort by hour
+                    let sortedData = {}
+
+                    for (const date in data[inputDic.date]) {
+                        const times = Object.keys(data[inputDic.date][date]).sort((a, b) => {
+                            const timeA = new Date(`${date} ${a}`);
+                            const timeB = new Date(`${date} ${b}`);
+                            return timeA.getTime() - timeB.getTime();
+                        });
+        
+                        sortedData[date] = {};
+        
+                        for (const time of times) {
+                            sortedData[date][time] = data[inputDic.date][date][time];
+                        }
+                    }
+        
+                    data[inputDic.date] = {}
+
+                    for (const key of Object.keys(sortedData).sort()) {
+                        data[inputDic.date][key] = sortedData[key]
+                    }
+                    
                 }
                 else{
                     data[inputDic.date] = template.date
                 }
                 
-                writeJsonFile("./src/data/", "reminder.json", data)
+                writeJsonFile("./src/data/", `${year}_reminder.json`, data)
                 popup('Rappel enregistré !')
             }
 
