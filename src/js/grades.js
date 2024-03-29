@@ -394,7 +394,6 @@ function printBigGrades(){
     
 
     let tbody = createTableGrades(Grades, maxColumnsSem1, "big", 1)
-    console.log(tbody)
     if(!tbody){
         log('Can\'t create the tableGrades cause there is no lastGrades.json nor grades.json')
         return false
@@ -423,7 +422,6 @@ function printBigGrades(){
     
     tbody = null
     tbody = createTableGrades(Grades, maxColumnsSem2, "big", 2)
-    console.log(tbody)
     if(!tbody){
         log('Can\'t create the tableGrades cause there is no lastGrades.json nor grades.json')
         return false

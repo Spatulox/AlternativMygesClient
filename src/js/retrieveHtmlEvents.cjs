@@ -177,6 +177,8 @@ document.addEventListener("DOMContentLoaded", async (event) => {
 
         const validerEvent = document.getElementById('validerEvent')
 
+
+        // Create an event
         if(e.target.id == validerEvent.id){
             const inputs = document.querySelectorAll('#plusAddEvent input');
             const textDesc = document.getElementsByTagName('textarea')[0];
@@ -189,7 +191,8 @@ document.addEventListener("DOMContentLoaded", async (event) => {
               });
 
             inputDic["description"] = textDesc.value
-
+            
+            // Check info format
             if(isNaN(new Date (inputDic.date))){
                 popup("Il faut mettre une date valide")
                 log("Wrong date format")
@@ -207,9 +210,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
                 return
             }
 
-            
-            //inputDic.date = inputDic.date.replace(/-/g, "/");
-
+            // Refactor informations
             let tmp = inputDic.date.split('-')
             inputDic.date = tmp[2]+"/"+tmp[1]+"/"+tmp[0]
             //console.log(date)
@@ -226,8 +227,9 @@ document.addEventListener("DOMContentLoaded", async (event) => {
                 }
             };
 
+            // Check if already event exist and write informations
             let data = readJsonFile("./src/data/reminder.json")
-
+ 
             if(!data){
                 data = {}
                 data[inputDic.date] = template.date
@@ -280,7 +282,6 @@ document.addEventListener("DOMContentLoaded", async (event) => {
                 plusAddEvent.classList.add('active')
                 plusAddEventImg.src = "./src/images/GES_logo.png"
             } else {
-                console.log("YEEET")
                 plusAddEvent.classList.remove('active')
                 plusAddEventImg.src = "./src/images/plus_logo_noir.png"
                 // L'élément n'a pas l'id "plusAddEvent" et n'a pas d'ancêtres avec cet id
