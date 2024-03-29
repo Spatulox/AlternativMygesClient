@@ -1,4 +1,4 @@
-<!-- <script type="text/javascript" src="./js/schedule.js"></script> -->
+<!--<script type="text/javascript" src="./js/schedule.js"></script>-->
 <div id="allContainerAbsences" class="flex flexAround wrap box">
         <div id="Lundi">
             <h2>Lundi</h2>
@@ -64,7 +64,7 @@
         <label for="date" class="underline marginTop10 width80">Description</label>
         <textarea name="description" id="eventDescription" cols="30" rows="10" class="width80 marginTop10"></textarea>
         
-        <input type="button" value="Valider" id="validerEvent" class="width50 marginTop10">
+        <input type="button" value="Valider" id="validerEvent" class="width50 marginTop10" onclick="loadPageH('schedule', event)">
     </div>
     <img src="./src/images/plus_logo_noir.png" id="plusAddEventImg" alt="plus logo">
 </div>
