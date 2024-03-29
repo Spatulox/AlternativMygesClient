@@ -7,3 +7,5 @@ config.json
 src/data/infos.json
 
 src/data/
+
+dist/
