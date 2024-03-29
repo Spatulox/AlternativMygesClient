@@ -19,6 +19,7 @@ async function Agenda(user, startD, endD){
         return false
     }
 
+
 	// Agenda have a lot unsorted objects inside
 	let agenda = await user.getAgenda(startD, endD)
 
@@ -172,7 +173,7 @@ export async function retrieveScheduleFromMyGES(){
 
 	const dateString = todayDate()[1]
 	// If today >= Friday
-    if (today >= saturday || dateString == "Vendredi"){
+    if (today >= saturday || dateString == "Samedi"){
         process.send(`Requesting next week schedule`)
 
         monday.setUTCHours(0,0,0,0)
@@ -192,6 +193,7 @@ export async function retrieveScheduleFromMyGES(){
     // saturday.setDate(saturday.getDate() + 7);
 
 	// I think it's useless
+
     let agenda = Agenda(user, monday, saturday)
     if(!agenda){
         process.send(agenda)
