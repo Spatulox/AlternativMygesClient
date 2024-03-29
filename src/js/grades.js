@@ -97,7 +97,6 @@ export function createTableGrades(Grades, maxColumns, thing = null, semesterNum 
     let tbody = document.createElement("tbody");
 
     let newGradesVar = newGrades(Grades[0].course)
-    console.log(newGradesVar)
     if(!newGradesVar){
         return false
     }
